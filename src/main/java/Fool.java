@@ -24,9 +24,10 @@ public class Fool {
         driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
 
 
-        Thread.sleep(2000);
+
         wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
         driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
+        Thread.sleep(2000);
 
         driver.quit();
 

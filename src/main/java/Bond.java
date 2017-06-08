@@ -13,7 +13,7 @@ public class Bond {
             Fool gameFool = new Fool();
             gameFool.fool();
 
-            Thread.sleep(3000000);
+            Thread.sleep(3600000);
         }
     }
 }
