@@ -8,8 +8,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class Fool {
 
-    public void fool() throws InterruptedException
-    {
+    public String startFool(String s) throws InterruptedException{
         System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
@@ -30,6 +29,7 @@ public class Fool {
             driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
             Thread.sleep(2000);
             driver.quit();
+            return s = "OK";
 
         } catch (Exception e) {
             try {
@@ -37,15 +37,27 @@ public class Fool {
                 driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
                 Thread.sleep(2000);
                 driver.quit();
+                return s = "OK";
 
             } catch (Exception e1){
-                Thread.sleep(10000);
+                try{
+                Thread.sleep(300000);
                 wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
                 driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
                 Thread.sleep(2000);
                 driver.quit();
+                return s = "OK";
+
+                } catch (Exception e2) {
+                return s = "BAD";
+                }
             }
         }
+
+        if (s == "OK") {} // записываем лог и завершаем метод
+            else if (s == "BAD") {} // записываем лог и переходим к отправке письма с проблемой
+
+
 
 
         // Если все ок - логирование в файл и брейк
