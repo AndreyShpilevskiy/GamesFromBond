@@ -2,7 +2,6 @@
 public class Bond {
 
 
-
     public static void main(String[] args) throws InterruptedException {
 
 //        System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
@@ -10,9 +9,14 @@ public class Bond {
 //        capabilities.setCapability("marionette", true);
 //        WebDriver driver = new FirefoxDriver(capabilities);
 //        WebDriverWait wait = new WebDriverWait(driver, 40);
+        int a = 1;
+        while (a == 1) {
 
-        BondStreet gameBondStreet = new BondStreet();
-        String s = "";
-        gameBondStreet.bondStreet(s);
+            BondStreet gameBondStreet = new BondStreet();
+            String s = "";
+            gameBondStreet.bondStreet(s);
+
+            Thread.sleep(3600000);
+        }
     }
 }
