@@ -8,7 +8,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class Fool {
 
-       public void fool(String fool) throws InterruptedException {
+       public void fool() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
@@ -27,6 +27,7 @@ public class Fool {
         Thread.sleep(2000);
         wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
         driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
+
         driver.quit();
 
     }

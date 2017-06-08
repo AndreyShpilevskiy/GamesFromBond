@@ -9,16 +9,15 @@ public class Bond {
 //        capabilities.setCapability("marionette", true);
 //        WebDriver driver = new FirefoxDriver(capabilities);
 //        WebDriverWait wait = new WebDriverWait(driver, 40);
+
         int a = 1;
         while (a == 1) {
 
             BondStreet gameBondStreet = new BondStreet();
-            String street = "";
-            gameBondStreet.bondStreet(street);
+            gameBondStreet.bondStreet();
 
             Fool gameFool = new Fool();
-            String fool = "";
-            gameFool.fool(fool);
+            gameFool.fool();
 
             Thread.sleep(3000000);
         }
