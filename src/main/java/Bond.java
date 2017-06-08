@@ -1,6 +1,6 @@
 
 public class Bond {
-
+    static String link = "https://www.bondstreet.ru/";
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -20,7 +20,7 @@ public class Bond {
             String fool = "";
             gameFool.fool(fool);
 
-            Thread.sleep(3600000);
+            Thread.sleep(3000000);
         }
     }
 }
