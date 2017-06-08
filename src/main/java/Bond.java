@@ -13,8 +13,12 @@ public class Bond {
         while (a == 1) {
 
             BondStreet gameBondStreet = new BondStreet();
-            String s = "";
-            gameBondStreet.bondStreet(s);
+            String street = "";
+            gameBondStreet.bondStreet(street);
+
+            Fool gameFool = new Fool();
+            String fool = "";
+            gameFool.fool(fool);
 
             Thread.sleep(3600000);
         }
