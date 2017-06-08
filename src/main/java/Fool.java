@@ -8,7 +8,8 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class Fool {
 
-       public void fool() throws InterruptedException {
+    public void fool() throws InterruptedException
+    {
         System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
@@ -24,17 +25,31 @@ public class Fool {
         driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
 
 
+        try {
+            wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
+            driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
+            Thread.sleep(2000);
+            driver.quit();
 
-        wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
-        driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
-        Thread.sleep(2000);
+        } catch (Exception e) {
+            try {
+                wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
+                driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
+                Thread.sleep(2000);
+                driver.quit();
 
-        driver.quit();
+            } catch (Exception e1){
+                Thread.sleep(10000);
+                wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
+                driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
+                Thread.sleep(2000);
+                driver.quit();
+            }
+        }
 
 
-           // Если все ок - логирование в файл и брейк
-           // Если НЕ ок - логирование и отправка уведомления на почту и брейк
+        // Если все ок - логирование в файл и брейк
+        // Если НЕ ок - логирование и отправка уведомления на почту и брейк
 
     }
 }
-

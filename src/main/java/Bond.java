@@ -6,9 +6,9 @@ public class Bond {
 
         int a = 1;
         while (a == 1) {
-
-            BondStreet gameBondStreet = new BondStreet();
-            gameBondStreet.bondStreet();
+//
+//            BondStreet gameBondStreet = new BondStreet();
+//            gameBondStreet.bondStreet();
 
             Fool gameFool = new Fool();
             gameFool.fool();
