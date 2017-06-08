@@ -4,9 +4,13 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class Fool {
+
+
+    static String s;
 
     public String startFool(String s) throws InterruptedException{
         System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
@@ -23,6 +27,7 @@ public class Fool {
         Thread.sleep(3000);
         driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
 
+        System.out.println(s+ "here");
 
         try {
             wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
@@ -54,8 +59,8 @@ public class Fool {
             }
         }
 
-        if (s == "OK") {} // записываем лог и завершаем метод
-            else if (s == "BAD") {} // записываем лог и переходим к отправке письма с проблемой
+    //    if (s == "OK") {} // записываем лог и завершаем метод
+      //      else if (s == "BAD") {} // записываем лог и переходим к отправке письма с проблемой
 
 
 
