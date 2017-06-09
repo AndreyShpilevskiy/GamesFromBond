@@ -113,9 +113,8 @@ public class Fool {
                     System.out.println("что то не то");
                 }
 
-            }
-
         }
+    }
 }
 
 
