@@ -38,7 +38,7 @@ public class Fool {
             driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
             Thread.sleep(2000);
             driver.quit();
-            return this.s = "OK1" ;
+            return this.s = "OK" ;
 
         } catch (Exception e) {
             try {
@@ -65,7 +65,7 @@ public class Fool {
         }
     }
 
-    public void logAndMail() throws IOException, MessagingException {
+    public void logAndMailFool() throws IOException, MessagingException {
         FileReader fr = new FileReader("C:\\work\\log_fool.txt");
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
@@ -75,7 +75,7 @@ public class Fool {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator+ str;
             str = br.readLine();
-            //System.out.println();
+
         }
         FileWriter fw = new FileWriter("C:\\work\\log_fool.txt");
         fw.write(result);
@@ -91,16 +91,13 @@ public class Fool {
             props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.port", "465");
-
                 Session s = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("andrej.shpilevskij@gmail.com", "50650608"); }});
-
                 try{
-
                     Message mess = new MimeMessage(s);
                     mess.setFrom(new InternetAddress("andrej.shpilevskij@gmail.com"));
-                    String[] emails={"rekoj@list.ru", "kuzhelod@gmail.com"};
+                    String[] emails={"as@develup.pro", "ek@develup.pro"};
                     InternetAddress dests[] = new InternetAddress[emails.length];
                         for(int i=0; i<emails.length; i++){
                         dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}
@@ -108,11 +105,9 @@ public class Fool {
                     mess.setSubject("Автоест по игре Дурак не прошел ");
                     mess.setText("Автоест по игре Дурак не прошел  " + date.toString());
                     Transport.send(mess);
-
                 }catch (Exception ex){
                     System.out.println("что то не то");
                 }
-
         }
     }
 }
