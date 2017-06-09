@@ -11,8 +11,9 @@ public class Bond {
 //            gameBondStreet.bondStreet();
 
             Fool gameFool = new Fool();
-            String s = Fool.s;
-            gameFool.startFool(s);
+            gameFool.startFool();
+            gameFool.logAndMail();
+            gameFool.print();
 
             Thread.sleep(3600000);
         }
