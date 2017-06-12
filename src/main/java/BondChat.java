@@ -41,10 +41,11 @@ public class BondChat {
         driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
 
         try {
-            wait.until(visibilityOfElementLocated(By.xpath("//div[@id='mCSB_1_container']/div[2]/div/div[3]/div[2]/div[2]/a/div/div")));
+            wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]")));
             Thread.sleep(5000);
             WebElement frame = driver.findElement(By.tagName("iframe"));
             driver.switchTo().frame(frame);
+            Thread.sleep(3000);
             wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span")));
             driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span")).click();
             Thread.sleep(3000);
@@ -128,7 +129,7 @@ public class BondChat {
             try {
                 Message mess = new MimeMessage(s);
                 mess.setFrom(new InternetAddress("devup2012@gmail.com"));
-                String[] emails = {"rekoj@list.ru", "ek@develup.pro"};
+                String[] emails = {"as@develup.pro", "ek@develup.pro"};
                 InternetAddress dests[] = new InternetAddress[emails.length];
                 for (int i = 0; i < emails.length; i++) {
                     dests[i] = new InternetAddress(emails[i].trim().toLowerCase());

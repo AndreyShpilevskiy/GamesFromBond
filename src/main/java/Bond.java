@@ -5,22 +5,24 @@ public class Bond {
 
     public static void main(String[] args) throws Exception {
 
-        int a = 1;
-        int i = 0;
+        int a = 1; // для бесконечного цикла
+        int i = 0; // для for,
         while (a == 1) {
 
-        BondStreet gameBondStreet = new BondStreet();
-        gameBondStreet.bondStreet();
-        gameBondStreet.logBondStreet();
-        gameBondStreet.mailBondStreet();
 
-            if(gameBondStreet.s == "BAD") {
+            BondStreet gameBondStreet = new BondStreet();
+            gameBondStreet.bondStreet();
+            gameBondStreet.logBondStreet();
+            gameBondStreet.mailBondStreet();
+            if (gameBondStreet.s == "BAD") {
                 for (gameBondStreet.s.equals("BAD"); i < 15; i++) {
                     if (gameBondStreet.s == "BAD") {
                         gameBondStreet.bondStreet();
-                        gameBondStreet.logBondStreet(); } }
-                    if (gameBondStreet.s == "OK") {
-                        gameBondStreet.mailBondStreetOk();
+                        gameBondStreet.logBondStreet();
+                    }
+                }
+                if (gameBondStreet.s == "OK") {
+                    gameBondStreet.mailBondStreetOk();
                 }
             }
 
@@ -56,7 +58,7 @@ public class Bond {
                 }
             }
 
-        Thread.sleep(300000);
+        Thread.sleep(3600000);
 
         }
     }
