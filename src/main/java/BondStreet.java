@@ -20,12 +20,13 @@ public class BondStreet {
 
     String s;
 
+
     public String bondStreet() throws InterruptedException {
         System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
-        WebDriverWait wait = new WebDriverWait(driver, 40);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
 
         driver.get(Bond.link);
         driver.findElement(By.id("main-email")).clear();
@@ -56,7 +57,7 @@ public class BondStreet {
 
             } catch (Exception e1) {
                 try {
-                    Thread.sleep(300000);
+                    Thread.sleep(5000);
                     wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[1]/div/div/div[1]/div[4]/div[8]/div[2]/a/span")));
                     driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[1]/div/div/div[1]/div[4]/div[8]/div[2]/a/span")).click();
                     wait.until(visibilityOfElementLocated(By.cssSelector("html.scotland-yard.page-game.dev.desktop.html-landscape body footer.b-footer div.b-footer__title p a")));
@@ -72,7 +73,7 @@ public class BondStreet {
             }
         }
     }
-    public void logAndMailBondStreet() throws IOException, MessagingException {
+    public void logBondStreet() throws IOException, MessagingException {
         FileReader fr = new FileReader("C:\\work\\log_bondStreet.txt");
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
@@ -80,7 +81,7 @@ public class BondStreet {
         String result = date.toString() + " Успешность запуска " + s;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
-            result += lineSeparator+ str;
+            result += lineSeparator + str;
             str = br.readLine();
         }
         FileWriter fw = new FileWriter("C:\\work\\log_bondStreet.txt");
@@ -88,9 +89,12 @@ public class BondStreet {
         fw.close();
         fr.close();
         br.close();
+    }
+
+    public void mailBondStreet() throws IOException, MessagingException {
         if (s == "OK") ;
         else if (s == "BAD"){
-
+            Date date = new Date();
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
@@ -99,11 +103,11 @@ public class BondStreet {
             props.put("mail.smtp.port", "465");
             Session s = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("andrej.shpilevskij@gmail.com", "50650608"); }});
+                return new PasswordAuthentication("devup2012@gmail.com", "upupDevelup404!"); }});
             try{
                 Message mess = new MimeMessage(s);
-                mess.setFrom(new InternetAddress("andrej.shpilevskij@gmail.com"));
-                String[] emails={"as@develup.pro", "ek@develup.pro"};
+                mess.setFrom(new InternetAddress("devup2012@gmail.com"));
+                String[] emails={"as@develup.pro", "ek@develup.pro"  };//
                 InternetAddress dests[] = new InternetAddress[emails.length];
                 for(int i=0; i<emails.length; i++){
                     dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}
@@ -117,6 +121,34 @@ public class BondStreet {
             }
         }
     }
+    public void mailBondStreetOk() throws IOException, MessagingException {
+
+            Date date = new Date();
+            Properties props = new Properties();
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+            Session s = Session.getDefaultInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("devup2012@gmail.com", "upupDevelup404!"); }});
+            try{
+                Message mess = new MimeMessage(s);
+                mess.setFrom(new InternetAddress("devup2012@gmail.com"));
+                String[] emails={"as@develup.pro", "ek@develup.pro"}; //, "ek@develup.pro"
+                InternetAddress dests[] = new InternetAddress[emails.length];
+                for(int i=0; i<emails.length; i++){
+                    dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}
+                mess.setRecipients(Message.RecipientType.TO, dests);
+                mess.setSubject("Восстановление игры BondStreet ");
+                mess.setText("Восстановление игры BondStreet  " + date.toString());
+                Transport.send(mess);
+
+            }catch (Exception ex){
+                System.out.println("что то не то");
+            }
+        }
 }
 
 
