@@ -12,8 +12,27 @@ public class Bond {
             findBondStreet();
             fool();
             bondChat();
+            signIn();
 
         Thread.sleep(3600000);
+        }
+    }
+
+    private static void signIn() throws InterruptedException, MessagingException, IOException {
+        SignIn signIn = new SignIn();
+        signIn.signIn();
+        signIn.logSignIn();
+        signIn.mailSignIn();
+        if (signIn.s == "BAD") {
+            for (signIn.s.equals("BAD"); i < 10; i++) {
+                if (signIn.s == "BAD") {
+                    signIn.signIn();
+                    signIn.logSignIn();
+                }
+            }
+            if (signIn.s == "OK") {
+                signIn.mailSignInOk();
+            }
         }
     }
 
@@ -23,7 +42,7 @@ public class Bond {
         gameBondStreet.logBondStreet();
         gameBondStreet.mailBondStreet();
         if (gameBondStreet.s == "BAD") {
-            for (gameBondStreet.s.equals("BAD"); i < 15; i++) {
+            for (gameBondStreet.s.equals("BAD"); i < 10; i++) {
                 if (gameBondStreet.s == "BAD") {
                     gameBondStreet.bondStreet();
                     gameBondStreet.logBondStreet();
@@ -41,7 +60,7 @@ public class Bond {
         gameFool.mailFool();
 
         if(gameFool.s == "BAD") {
-            for (gameFool.s.equals("BAD"); i < 15; i++) {
+            for (gameFool.s.equals("BAD"); i < 10; i++) {
                 if (gameFool.s == "BAD") {
                     gameFool.fool();
                     gameFool.logFool(); } }
@@ -57,7 +76,7 @@ public class Bond {
         gameBondChat.mailBondChat();
 
         if(gameBondChat.s == "BAD") {
-            for (gameBondChat.s.equals("BAD"); i < 15; i++) {
+            for (gameBondChat.s.equals("BAD"); i < 10; i++) {
                 if (gameBondChat.s == "BAD") {
                     gameBondChat.bondChat();
                     gameBondChat.logBondChat(); } }

@@ -6,20 +6,14 @@
 
     <groupId>Bond</groupId>
     <artifactId>GamesFromBond</artifactId>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
+    <name>GamesFromBond</name>
+    <url>http://maven.apache.org</url>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <properties>
+        <jdk.version>1.8</jdk.version>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -51,6 +45,11 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>1.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>3.4.0</version>
         </dependency>
     </dependencies>
 

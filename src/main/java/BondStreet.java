@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Driver;
 import java.util.Date;
 import java.util.Properties;
 
@@ -18,7 +19,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 public class BondStreet {
 
     String s;
-    SignIn signIn = new SignIn();
+
 
     public String bondStreet() throws InterruptedException, IOException, MessagingException {
         System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
@@ -27,13 +28,13 @@ public class BondStreet {
         WebDriver driver = new FirefoxDriver(capabilities);
         WebDriverWait wait = new WebDriverWait(driver, 40);
 
-            driver.get(Bond.link);
-            driver.findElement(By.id("main-email")).clear();
-            driver.findElement(By.id("main-email")).sendKeys("vkfbok@mail.ru");
-            driver.findElement(By.cssSelector("input.auth-password")).clear();
-            driver.findElement(By.cssSelector("input.auth-password")).sendKeys("11111111");
-            Thread.sleep(3000);
-            driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
+        driver.get(Bond.link);
+        driver.findElement(By.id("main-email")).clear();
+        driver.findElement(By.id("main-email")).sendKeys("vkfbok@mail.ru");
+        driver.findElement(By.cssSelector("input.auth-password")).clear();
+        driver.findElement(By.cssSelector("input.auth-password")).sendKeys("11111111");
+        Thread.sleep(3000);
+        driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
 
             try {
                 wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[1]/div/div/div[1]/div[4]/div[8]/div[2]/a/span")));
@@ -56,7 +57,7 @@ public class BondStreet {
 
                 } catch (Exception e1) {
                     try {
-                        Thread.sleep(5000);
+                        Thread.sleep(20000);
                         wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[1]/div/div/div[1]/div[4]/div[8]/div[2]/a/span")));
                         driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[1]/div/div/div[1]/div[4]/div[8]/div[2]/a/span")).click();
                         wait.until(visibilityOfElementLocated(By.cssSelector("html.scotland-yard.page-game.dev.desktop.html-landscape body footer.b-footer div.b-footer__title p a")));
