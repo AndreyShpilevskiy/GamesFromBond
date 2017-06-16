@@ -29,18 +29,17 @@ public class Fool {
         Thread.sleep(3000);
         driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
 
-
         try {
-            wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
-            driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
+            wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[2]/div[1]/div[1]/div/a/span")));
+            driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[2]/div[1]/div[1]/div/a/span")).click();
             Thread.sleep(2000);
             driver.quit();
             return this.s = "OK";
 
         } catch (Exception e) {
             try {
-                wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
-                driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
+                wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[2]/div[1]/div[1]/div/a/span")));
+                driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[2]/div[1]/div[1]/div/a/span")).click();
                 Thread.sleep(2000);
                 driver.quit();
                 return this.s = "OK";
@@ -48,8 +47,8 @@ public class Fool {
             } catch (Exception e1) {
                 try {
                     Thread.sleep(300000);
-                    wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")));
-                    driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[2]/div[4]/div[2]/div[1]/div[1]/div/a")).click();
+                    wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[2]/div[1]/div[1]/div/a/span")));
+                    driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[2]/div[1]/div[1]/div/a/span")).click();
                     Thread.sleep(2000);
                     driver.quit();
                     return this.s = "OK";

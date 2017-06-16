@@ -28,11 +28,7 @@ public class BondChat {
         WebDriver driver = new FirefoxDriver(capabilities);
         WebDriverWait wait = new WebDriverWait(driver, 20);
 
-
-        driver.get("https://test:best7@bond.rta.agency");
-        driver.switchTo().alert().accept();
-        Thread.sleep(3000);
-
+        driver.get(Bond.link);
         driver.findElement(By.id("main-email")).clear();
         driver.findElement(By.id("main-email")).sendKeys("vkfbok@mail.ru");
         driver.findElement(By.cssSelector("input.auth-password")).clear();
