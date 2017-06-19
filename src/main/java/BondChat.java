@@ -19,49 +19,54 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 public class BondChat {
 
     String s;
+    String logFileName = "C:\\work\\log_bondChat.txt";
+    String nameIframe = "iframe";
+    String xPathFirstClick = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span";
+    String xPathSecondClick = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[3]/span";
 
     public String bondChat() throws Exception {
 
-        System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
+        System.setProperty(Parameters.webDriver, Parameters.pathFileWebDriverFF);
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
         WebDriverWait wait = new WebDriverWait(driver, 20);
 
-        driver.get(Bond.link);
-        driver.findElement(By.id("main-email")).clear();
-        driver.findElement(By.id("main-email")).sendKeys("vkfbok@mail.ru");
-        driver.findElement(By.cssSelector("input.auth-password")).clear();
-        driver.findElement(By.cssSelector("input.auth-password")).sendKeys("11111111");
+        driver.get(Parameters.link);
+        driver.findElement(By.id(Parameters.xPathEmailField)).clear();
+        driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
+        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear();
+        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
         Thread.sleep(3000);
-        driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
+        driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
 
         try {
             wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]")));
             Thread.sleep(5000);
-            WebElement frame = driver.findElement(By.tagName("iframe"));
+            WebElement frame = driver.findElement(By.tagName(nameIframe));
             driver.switchTo().frame(frame);
             Thread.sleep(3000);
-            wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span")));
-            driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span")).click();
+            wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
+            driver.findElement(By.xpath(xPathFirstClick)).click();
             Thread.sleep(3000);
-            wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[3]/span")));
-            driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[3]/span")).click();
+            wait.until(visibilityOfElementLocated(By.xpath(xPathSecondClick)));
+            driver.findElement(By.xpath(xPathSecondClick)).click();
             Thread.sleep(2000);
             driver.quit();
             return this.s = "OK";
 
         } catch (Exception e) {
             try {
-                wait.until(visibilityOfElementLocated(By.xpath("//div[@id='mCSB_1_container']/div[2]/div/div[3]/div[2]/div[2]/a/div/div")));
+                wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]")));
                 Thread.sleep(5000);
-                WebElement frame = driver.findElement(By.tagName("iframe"));
+                WebElement frame = driver.findElement(By.tagName(nameIframe));
                 driver.switchTo().frame(frame);
-                wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span")));
-                driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span")).click();
                 Thread.sleep(3000);
-                wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[3]/span")));
-                driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[3]/span")).click();
+                wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
+                driver.findElement(By.xpath(xPathFirstClick)).click();
+                Thread.sleep(3000);
+                wait.until(visibilityOfElementLocated(By.xpath(xPathSecondClick)));
+                driver.findElement(By.xpath(xPathSecondClick)).click();
                 Thread.sleep(2000);
                 driver.quit();
                 return this.s = "OK";
@@ -69,15 +74,16 @@ public class BondChat {
             } catch (Exception e1) {
                 try {
                     Thread.sleep(30000);
-                    wait.until(visibilityOfElementLocated(By.xpath("//div[@id='mCSB_1_container']/div[2]/div/div[3]/div[2]/div[2]/a/div/div")));
+                    wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]")));
                     Thread.sleep(5000);
-                    WebElement frame = driver.findElement(By.tagName("iframe"));
+                    WebElement frame = driver.findElement(By.tagName(nameIframe));
                     driver.switchTo().frame(frame);
-                    wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span")));
-                    driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span")).click();
                     Thread.sleep(3000);
-                    wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[3]/span")));
-                    driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[3]/span")).click();
+                    wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
+                    driver.findElement(By.xpath(xPathFirstClick)).click();
+                    Thread.sleep(3000);
+                    wait.until(visibilityOfElementLocated(By.xpath(xPathSecondClick)));
+                    driver.findElement(By.xpath(xPathSecondClick)).click();
                     Thread.sleep(2000);
                     driver.quit();
                     return this.s = "OK";
@@ -91,7 +97,7 @@ public class BondChat {
     }
 
     public void logBondChat() throws IOException, MessagingException {
-        FileReader fr = new FileReader("C:\\work\\log_bondChat.txt");
+        FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
@@ -101,7 +107,25 @@ public class BondChat {
             result += lineSeparator + str;
             str = br.readLine();
         }
-        FileWriter fw = new FileWriter("C:\\work\\log_bondChat.txt");
+        FileWriter fw = new FileWriter(logFileName);
+        fw.write(result);
+        fw.close();
+        fr.close();
+        br.close();
+    }
+
+    public void logBondChatBad() throws IOException, MessagingException {
+        FileReader fr = new FileReader(logFileName);
+        BufferedReader br = new BufferedReader(fr);
+        Date date = new Date();
+        String str = br.readLine();
+        String result = date.toString() + " Чат не восстановился на протяжении 10 попыток ";
+        while (str != null) {
+            String lineSeparator = System.getProperty("line.separator");
+            result += lineSeparator + str;
+            str = br.readLine();
+        }
+        FileWriter fw = new FileWriter(logFileName);
         fw.write(result);
         fw.close();
         fr.close();
@@ -120,20 +144,20 @@ public class BondChat {
             props.put("mail.smtp.port", "465");
             Session s = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("devup2012@gmail.com", "upupDevelup404!");
+                    return new PasswordAuthentication(Parameters.sendMail, Parameters.sendMailPassword);
                 }
             });
             try {
                 Message mess = new MimeMessage(s);
-                mess.setFrom(new InternetAddress("devup2012@gmail.com"));
+                mess.setFrom(new InternetAddress(Parameters.sendMail));
                 String[] emails = {"as@develup.pro", "ek@develup.pro"};
                 InternetAddress dests[] = new InternetAddress[emails.length];
                 for (int i = 0; i < emails.length; i++) {
                     dests[i] = new InternetAddress(emails[i].trim().toLowerCase());
                 }
                 mess.setRecipients(Message.RecipientType.TO, dests);
-                mess.setSubject("Чат на деве упал ");
-                mess.setText("Чат на деве упал. Время:  " + date.toString());
+                mess.setSubject("Чат на проде BondStreet упал ");
+                mess.setText("Чат на проде упал BondStreet. Время:  " + date.toString());
                 Transport.send(mess);
 
             } catch (Exception ex) {
@@ -165,8 +189,8 @@ public class BondChat {
                 dests[i] = new InternetAddress(emails[i].trim().toLowerCase());
             }
             mess.setRecipients(Message.RecipientType.TO, dests);
-            mess.setSubject("Восстановление чата BondStreet ");
-            mess.setText("Восстановление чата BondStreet  " + date.toString());
+            mess.setSubject("Восстановление чата на проде BondStreet ");
+            mess.setText("Восстановление чата на проде BondStreet  " + date.toString());
             Transport.send(mess);
 
         }catch (Exception ex){

@@ -20,39 +20,42 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 public class SignIn {
 
     String s;
+    String logFileName = "C:\\work\\log_signIn.txt";
+    String xPathFirstClick = "//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a";
+
     public String signIn() throws IOException, MessagingException, InterruptedException {
 
-            System.setProperty("webdriver.gecko.driver", "C://IT/Test/geckodriver.exe");
+            System.setProperty(Parameters.webDriver, Parameters.pathFileWebDriverFF);
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
             capabilities.setCapability("marionette", true);
             WebDriver driver = new FirefoxDriver(capabilities);
             WebDriverWait wait = new WebDriverWait(driver, 40);
 
         try {
-            driver.get(Bond.link);
-            driver.findElement(By.id("main-email")).clear();
-            driver.findElement(By.id("main-email")).sendKeys("vkfbok@mail.ru");
-            driver.findElement(By.cssSelector("input.auth-password")).clear();
-            driver.findElement(By.cssSelector("input.auth-password")).sendKeys("11111111");
+            driver.get(Parameters.link);
+            driver.findElement(By.id(Parameters.xPathEmailField)).clear();
+            driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
+            driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear();
+            driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
             Thread.sleep(3000);
-            driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
-            wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a")));
-            driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a")).click();
+            driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
+            wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
+            driver.findElement(By.xpath(xPathFirstClick)).click();
             Thread.sleep(3000);
             driver.quit();
             return this.s = "OK";
 
             } catch (Exception e) {
                 try {
-                    driver.get(Bond.link);
-                    driver.findElement(By.id("main-email")).clear();
-                    driver.findElement(By.id("main-email")).sendKeys("vkfbok@mail.ru");
-                    driver.findElement(By.cssSelector("input.auth-password")).clear();
-                    driver.findElement(By.cssSelector("input.auth-password")).sendKeys("11111111");
+                    driver.get(Parameters.link);
+                    driver.findElement(By.id(Parameters.xPathEmailField)).clear();
+                    driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
+                    driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear();
+                    driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
                     Thread.sleep(3000);
-                    driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
-                    wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a")));
-                    driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a")).click();
+                    driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
+                    wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
+                    driver.findElement(By.xpath(xPathFirstClick)).click();
                     Thread.sleep(3000);
                     driver.quit();
                     return this.s = "OK";
@@ -60,15 +63,15 @@ public class SignIn {
                 } catch (Exception e1) {
                     try {
                         Thread.sleep(30000);
-                        driver.get(Bond.link);
-                        driver.findElement(By.id("main-email")).clear();
-                        driver.findElement(By.id("main-email")).sendKeys("vkfbok@mail.ru");
-                        driver.findElement(By.cssSelector("input.auth-password")).clear();
-                        driver.findElement(By.cssSelector("input.auth-password")).sendKeys("11111111");
+                        driver.get(Parameters.link);
+                        driver.findElement(By.id(Parameters.xPathEmailField)).clear();
+                        driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
+                        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear();
+                        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
                         Thread.sleep(3000);
-                        driver.findElement(By.cssSelector("button.btn--red.btn--x3.login_button")).click();
-                        wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a")));
-                        driver.findElement(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a")).click();
+                        driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
+                        wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
+                        driver.findElement(By.xpath(xPathFirstClick)).click();
                         Thread.sleep(3000);
                         driver.quit();
                         return this.s = "OK";
@@ -82,7 +85,7 @@ public class SignIn {
         }
 
     public void logSignIn() throws IOException, MessagingException {
-        FileReader fr = new FileReader("C:\\work\\log_signIn.txt");
+        FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
@@ -92,7 +95,25 @@ public class SignIn {
             result += lineSeparator + str;
             str = br.readLine();
         }
-        FileWriter fw = new FileWriter("C:\\work\\log_signIn.txt");
+        FileWriter fw = new FileWriter(logFileName);
+        fw.write(result);
+        fw.close();
+        fr.close();
+        br.close();
+    }
+
+    public void logSignInBad() throws IOException, MessagingException {
+        FileReader fr = new FileReader(logFileName);
+        BufferedReader br = new BufferedReader(fr);
+        Date date = new Date();
+        String str = br.readLine();
+        String result = date.toString() + " Авторизоваться на BondStreet не восстановилась на протяжении 10 попыток ";
+        while (str != null) {
+            String lineSeparator = System.getProperty("line.separator");
+            result += lineSeparator + str;
+            str = br.readLine();
+        }
+        FileWriter fw = new FileWriter(logFileName);
         fw.write(result);
         fw.close();
         fr.close();
@@ -111,10 +132,10 @@ public class SignIn {
             props.put("mail.smtp.port", "465");
             Session s = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("devup2012@gmail.com", "upupDevelup404!"); }});
+                    return new PasswordAuthentication(Parameters.sendMail, Parameters.sendMailPassword); }});
             try{
                 Message mess = new MimeMessage(s);
-                mess.setFrom(new InternetAddress("devup2012@gmail.com"));
+                mess.setFrom(new InternetAddress(Parameters.sendMail));
                 String[] emails={"as@develup.pro", "ek@develup.pro"  };//
                 InternetAddress dests[] = new InternetAddress[emails.length];
                 for(int i=0; i<emails.length; i++){

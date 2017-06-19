@@ -2,7 +2,7 @@ import javax.mail.MessagingException;
 import java.io.IOException;
 
 public class Bond {
-    static String link = "https://www.bondstreet.ru/";
+
     static int a = 1; // для бесконечного цикла
     static int i = 0; // для for,
 
@@ -23,6 +23,7 @@ public class Bond {
         signIn.signIn();
         signIn.logSignIn();
         signIn.mailSignIn();
+
         if (signIn.s == "BAD") {
             for (signIn.s.equals("BAD"); i < 10; i++) {
                 if (signIn.s == "BAD") {
@@ -33,6 +34,7 @@ public class Bond {
             if (signIn.s == "OK") {
                 signIn.mailSignInOk();
             }
+            else signIn.logSignInBad();
         }
     }
 
@@ -41,6 +43,7 @@ public class Bond {
         gameBondStreet.bondStreet();
         gameBondStreet.logBondStreet();
         gameBondStreet.mailBondStreet();
+
         if (gameBondStreet.s == "BAD") {
             for (gameBondStreet.s.equals("BAD"); i < 10; i++) {
                 if (gameBondStreet.s == "BAD") {
@@ -51,6 +54,7 @@ public class Bond {
             if (gameBondStreet.s == "OK") {
                 gameBondStreet.mailBondStreetOk();
             }
+            else gameBondStreet.logBondStreetBad();
         }
     }
     public static void fool () throws InterruptedException, IOException, MessagingException {
@@ -63,12 +67,16 @@ public class Bond {
             for (gameFool.s.equals("BAD"); i < 10; i++) {
                 if (gameFool.s == "BAD") {
                     gameFool.fool();
-                    gameFool.logFool(); } }
+                    gameFool.logFool();
+                }
+            }
             if (gameFool.s == "OK") {
                 gameFool.mailFoolOk();
             }
+            else gameFool.logFoolBad();
         }
     }
+
     public static void bondChat() throws Exception {
         BondChat gameBondChat = new BondChat();
         gameBondChat.bondChat();
@@ -79,10 +87,13 @@ public class Bond {
             for (gameBondChat.s.equals("BAD"); i < 10; i++) {
                 if (gameBondChat.s == "BAD") {
                     gameBondChat.bondChat();
-                    gameBondChat.logBondChat(); } }
+                    gameBondChat.logBondChat();
+                }
+            }
             if (gameBondChat.s == "OK") {
                 gameBondChat.mailBondChatOk();
             }
+            else gameBondChat.logBondChatBad();
         }
     }
 }
