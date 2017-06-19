@@ -21,6 +21,7 @@ public class BondChat {
     String s;
     String logFileName = "C:\\work\\log_bondChat.txt";
     String nameIframe = "iframe";
+    String xPathFindElement1 = "//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]";
     String xPathFirstClick = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span";
     String xPathSecondClick = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[3]/span";
 
@@ -41,7 +42,7 @@ public class BondChat {
         driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
 
         try {
-            wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]")));
+            wait.until(visibilityOfElementLocated(By.xpath(xPathFindElement1)));
             Thread.sleep(5000);
             WebElement frame = driver.findElement(By.tagName(nameIframe));
             driver.switchTo().frame(frame);
@@ -57,7 +58,7 @@ public class BondChat {
 
         } catch (Exception e) {
             try {
-                wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]")));
+                wait.until(visibilityOfElementLocated(By.xpath(xPathFindElement1)));
                 Thread.sleep(5000);
                 WebElement frame = driver.findElement(By.tagName(nameIframe));
                 driver.switchTo().frame(frame);
@@ -74,7 +75,7 @@ public class BondChat {
             } catch (Exception e1) {
                 try {
                     Thread.sleep(30000);
-                    wait.until(visibilityOfElementLocated(By.xpath("//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]")));
+                    wait.until(visibilityOfElementLocated(By.xpath(xPathFindElement1)));
                     Thread.sleep(5000);
                     WebElement frame = driver.findElement(By.tagName(nameIframe));
                     driver.switchTo().frame(frame);
@@ -150,7 +151,7 @@ public class BondChat {
             try {
                 Message mess = new MimeMessage(s);
                 mess.setFrom(new InternetAddress(Parameters.sendMail));
-                String[] emails = {"as@develup.pro", "ek@develup.pro"};
+                String[] emails = Parameters.sendToMail;
                 InternetAddress dests[] = new InternetAddress[emails.length];
                 for (int i = 0; i < emails.length; i++) {
                     dests[i] = new InternetAddress(emails[i].trim().toLowerCase());
@@ -177,13 +178,13 @@ public class BondChat {
         props.put("mail.smtp.port", "465");
         Session s = Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("devup2012@gmail.com", "upupDevelup404!");
+                return new PasswordAuthentication(Parameters.sendMail, Parameters.sendMailPassword);
             }
         });
         try {
             Message mess = new MimeMessage(s);
-            mess.setFrom(new InternetAddress("devup2012@gmail.com"));
-            String[] emails = {"as@develup.pro", "ek@develup.pro"};
+            mess.setFrom(new InternetAddress(Parameters.sendMail));
+            String[] emails = Parameters.sendToMail;
             InternetAddress dests[] = new InternetAddress[emails.length];
             for (int i = 0; i < emails.length; i++) {
                 dests[i] = new InternetAddress(emails[i].trim().toLowerCase());

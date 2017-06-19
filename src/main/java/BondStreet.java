@@ -129,7 +129,7 @@ public class BondStreet {
             try{
                 Message mess = new MimeMessage(s);
                 mess.setFrom(new InternetAddress(Parameters.sendMail));
-                String[] emails={"as@develup.pro", "ek@develup.pro"  };//
+                String[] emails = Parameters.sendToMail;//
                 InternetAddress dests[] = new InternetAddress[emails.length];
                 for(int i=0; i<emails.length; i++){
                     dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}
@@ -154,11 +154,11 @@ public class BondStreet {
             props.put("mail.smtp.port", "465");
             Session s = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("devup2012@gmail.com", "upupDevelup404!"); }});
+                    return new PasswordAuthentication(Parameters.sendMail, Parameters.sendMailPassword); }});
             try{
                 Message mess = new MimeMessage(s);
-                mess.setFrom(new InternetAddress("devup2012@gmail.com"));
-                String[] emails={"as@develup.pro", "ek@develup.pro"}; //, "ek@develup.pro"
+                mess.setFrom(new InternetAddress(Parameters.sendMail));
+                String[] emails = Parameters.sendToMail;
                 InternetAddress dests[] = new InternetAddress[emails.length];
                 for(int i=0; i<emails.length; i++){
                     dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}

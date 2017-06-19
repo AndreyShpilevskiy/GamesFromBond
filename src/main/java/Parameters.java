@@ -13,5 +13,6 @@ public class Parameters {
 
     static String sendMail = "devup2012@gmail.com";
     static String sendMailPassword = "upupDevelup404!";
+    static String[] sendToMail = {"as@develup.pro", "ek@develup.pro"};
 
 }
