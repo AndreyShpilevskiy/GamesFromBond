@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.*;
@@ -20,7 +21,7 @@ public class BondStreet {
 
     String s;
     String logFileName = "C:\\work\\log_bondStreet.txt";
-    String xPathFirstClick = "//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[1]/div/div/div[1]/div[4]/div[8]/div[2]/a/span";
+    String xPathFirstClick = "/html/body/div[1]/div/div[3]/div[4]/div[1]/div/div/div[1]/div[3]/div[8]/div[2]/a/span";
     String cssSecondClick = "html.scotland-yard.page-game.dev.desktop.html-landscape body footer.b-footer div.b-footer__title p a";
 
 
@@ -29,7 +30,8 @@ public class BondStreet {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
-        WebDriverWait wait = new WebDriverWait(driver, 40);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+//        Actions action = new Actions(driver);
 
         driver.get(Parameters.link);
         driver.findElement(By.id(Parameters.xPathEmailField)).clear();
@@ -38,6 +40,8 @@ public class BondStreet {
         driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
         Thread.sleep(3000);
         driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
+        wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat)));
+        driver.findElement(By.xpath(Parameters.xPathButtonChat)).click();
 
             try {
                 wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));

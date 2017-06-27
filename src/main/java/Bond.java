@@ -57,6 +57,7 @@ public class Bond {
             else gameBondStreet.logBondStreetBad();
         }
     }
+
     public static void fool () throws InterruptedException, IOException, MessagingException {
         Fool gameFool = new Fool();
         gameFool.fool();

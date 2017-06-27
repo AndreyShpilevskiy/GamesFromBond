@@ -29,7 +29,7 @@ public class SignIn {
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
             capabilities.setCapability("marionette", true);
             WebDriver driver = new FirefoxDriver(capabilities);
-            WebDriverWait wait = new WebDriverWait(driver, 40);
+            WebDriverWait wait = new WebDriverWait(driver, 20);
 
         try {
             driver.get(Parameters.link);
@@ -62,7 +62,7 @@ public class SignIn {
 
                 } catch (Exception e1) {
                     try {
-                        Thread.sleep(30000);
+                        Thread.sleep(20000);
                         driver.get(Parameters.link);
                         driver.findElement(By.id(Parameters.xPathEmailField)).clear();
                         driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);

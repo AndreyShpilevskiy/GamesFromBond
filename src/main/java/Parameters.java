@@ -1,12 +1,19 @@
+/*
+    Все пояснения к коду записаны в классе Fool
+ */
 
 public class Parameters {
 
     static String link = "https://www.bondstreet.ru/";
-    static String login = "vkfbok@mail.ru";
+    static String login = "bondtest1@no-spam.ws";
     static String password = "11111111";
     static String xPathLoginButton = "button.btn--red.btn--x3.login_button";
     static String xPathEmailField = "main-email";
     static String xPathPasswordField = "input.auth-password";
+
+    static String xPathButtonChat = "/html/body/div[1]/div/div[3]/div[1]/div[3]/div[2]/div[2]/a";
+
+    static String xPathButtonGame = "/html/body/div[1]/div/div[3]/div[1]/div[1]/a[3]";
 
     static String webDriver = "webdriver.gecko.driver";
     static String pathFileWebDriverFF = "C://IT/Test/geckodriver.exe";

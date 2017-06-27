@@ -74,7 +74,7 @@ public class BondChat {
 
             } catch (Exception e1) {
                 try {
-                    Thread.sleep(30000);
+                    Thread.sleep(20000);
                     wait.until(visibilityOfElementLocated(By.xpath(xPathFindElement1)));
                     Thread.sleep(5000);
                     WebElement frame = driver.findElement(By.tagName(nameIframe));

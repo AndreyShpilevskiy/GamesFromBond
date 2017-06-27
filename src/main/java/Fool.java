@@ -1,6 +1,9 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.*;
@@ -12,45 +15,77 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class Fool {
 
+
+
     String s;
     String logFileName = "C:\\work\\log_fool.txt";
-    String xPathFirstClick = "//*[@id=\"mCSB_1_container\"]/div[3]/div[4]/div[2]/div[1]/div[1]/div/a/span";
+    String xPathButtonGameFool = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]/a/div";
+    String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]";
 
     public String fool() throws InterruptedException {
         System.setProperty(Parameters.webDriver, Parameters.pathFileWebDriverFF);
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
-        WebDriverWait wait = new WebDriverWait(driver, 40);
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        Actions action = new Actions(driver);
 
         driver.get(Parameters.link);
-        driver.findElement(By.id(Parameters.xPathEmailField)).clear();
-        driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
-        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear();
-        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
+        driver.findElement(By.id(Parameters.xPathEmailField)).clear(); // ввод логина
+        driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login); // ввод логина
+        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear(); // ввод пароля
+        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password); //ввод пароля
         Thread.sleep(3000);
-        driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
+        driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click(); // клик на авторизоваться
+        wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat))); // клик на авторизоваться
+        driver.findElement(By.xpath(Parameters.xPathButtonChat)).click(); // закрыть автоматически открывающийся чат
 
         try {
-            wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
-            driver.findElement(By.xpath(xPathFirstClick)).click();
+            wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
+            driver.findElement(By.xpath(Parameters.xPathButtonGame)).click(); // вход в раздел Игры
+            Thread.sleep(2000);
+            WebElement element = driver.findElement(By.xpath(elementHover)); // скролл на элемент(div) поле с кнопкой Дурак
+            ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element); // скролл на элемент(div), поле с кнопкой Дурак
+            Thread.sleep(2000);
+            action.build();
+            action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div), поле с кнопкой Дурак
+            wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFool))); // клик на кнопку Дурак, которая появилась после ховера
+            driver.findElement(By.xpath(xPathButtonGameFool)).click(); // клик на кнопку Дурак, которая появилась после ховера
             Thread.sleep(2000);
             driver.quit();
             return this.s = "OK";
 
         } catch (Exception e) {
             try {
-                wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
-                driver.findElement(By.xpath(xPathFirstClick)).click();
+                wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
+                driver.findElement(By.xpath(Parameters.xPathButtonGame)).click(); // вход в раздел Игры
+                Thread.sleep(2000);
+                WebElement element = driver.findElement(By.xpath(elementHover)); // скролл на элемент(div) поле с кнопкой Дурак
+                ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element); // скролл на элемент(div) поле с кнопкой Дурак
+                Thread.sleep(2000);
+                action.build();
+                action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div) поле с кнопкой Дурак
+                wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFool))); // клик на кнопку Дурак, которая появилась после ховера
+                driver.findElement(By.xpath(xPathButtonGameFool)).click(); // клик на кнопку Дурак, которая появилась после ховера
+
                 Thread.sleep(2000);
                 driver.quit();
                 return this.s = "OK";
 
             } catch (Exception e1) {
                 try {
-                    Thread.sleep(300000);
-                    wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
-                    driver.findElement(By.xpath(xPathFirstClick)).click();
+                    Thread.sleep(20000);
+                    wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
+                    driver.findElement(By.xpath(Parameters.xPathButtonGame)).click(); // вход в раздел Игры
+                    Thread.sleep(2000);
+                    WebElement element = driver.findElement(By.xpath(elementHover)); // скролл на элемент(div) поле с кнопкой Дурак
+                    ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element); // скролл на элемент(div) поле с кнопкой Дурак
+                    Thread.sleep(2000);
+                    action.build();
+                    action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div) поле с кнопкой Дурак
+                    wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFool))); // клик на кнопку Дурак, которая появилась после ховера
+                    driver.findElement(By.xpath(xPathButtonGameFool)).click(); // клик на кнопку Дурак, которая появилась после ховера
+
                     Thread.sleep(2000);
                     driver.quit();
                     return this.s = "OK";
