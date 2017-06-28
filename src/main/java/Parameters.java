@@ -5,8 +5,8 @@
 public class Parameters {
 
     static String link = "https://www.bondstreet.ru/";
-    static String login = "bondtest1@no-spam.ws";
-    static String password = "11111111";
+    static String login = "your login";
+    static String password = "your password";
     static String xPathLoginButton = "button.btn--red.btn--x3.login_button";
     static String xPathEmailField = "main-email";
     static String xPathPasswordField = "input.auth-password";
@@ -21,5 +21,7 @@ public class Parameters {
     static String sendMail = "devup2012@gmail.com";
     static String sendMailPassword = "upupDevelup404!";
     static String[] sendToMail = {"as@develup.pro", "ek@develup.pro"};
+
+    static String res = " т.к. не смог авторизоваться на BondStreet ";
 
 }

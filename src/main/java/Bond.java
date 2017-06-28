@@ -1,6 +1,3 @@
-import javax.mail.MessagingException;
-import java.io.IOException;
-
 public class Bond {
 
     static int a = 1; // для бесконечного цикла
@@ -9,36 +6,16 @@ public class Bond {
     public static void main(String[] args) throws Exception {
 
         while (a == 1) {
+
             findBondStreet();
             fool();
             bondChat();
-            signIn();
 
         Thread.sleep(3600000);
         }
     }
 
-    private static void signIn() throws InterruptedException, MessagingException, IOException {
-        SignIn signIn = new SignIn();
-        signIn.signIn();
-        signIn.logSignIn();
-        signIn.mailSignIn();
-
-        if (signIn.s == "BAD") {
-            for (signIn.s.equals("BAD"); i < 10; i++) {
-                if (signIn.s == "BAD") {
-                    signIn.signIn();
-                    signIn.logSignIn();
-                }
-            }
-            if (signIn.s == "OK") {
-                signIn.mailSignInOk();
-            }
-            else signIn.logSignInBad();
-        }
-    }
-
-    public static void findBondStreet() throws InterruptedException, IOException, MessagingException {
+    public static void findBondStreet() throws Exception {
         BondStreet gameBondStreet = new BondStreet();
         gameBondStreet.bondStreet();
         gameBondStreet.logBondStreet();
@@ -58,7 +35,7 @@ public class Bond {
         }
     }
 
-    public static void fool () throws InterruptedException, IOException, MessagingException {
+    public static void fool () throws Exception {
         Fool gameFool = new Fool();
         gameFool.fool();
         gameFool.logFool();

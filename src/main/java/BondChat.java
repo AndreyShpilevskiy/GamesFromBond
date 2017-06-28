@@ -18,7 +18,9 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class BondChat {
 
+    SignIn signIn = new SignIn();
     String s;
+    String res = " ";
     String logFileName = "C:\\work\\log_bondChat.txt";
     String nameIframe = "iframe";
     String xPathFindElement1 = "//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]";
@@ -31,8 +33,9 @@ public class BondChat {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
+        try{
         driver.get(Parameters.link);
         driver.findElement(By.id(Parameters.xPathEmailField)).clear();
         driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
@@ -40,6 +43,14 @@ public class BondChat {
         driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
         Thread.sleep(3000);
         driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
+        signIn.s = "OK во время теста Чата BondStreet";
+        SignIn.logSignIn(); }
+            catch (Exception e0) {
+                driver.quit();
+                signIn.s = "BAD во время теста Чата BondStreet";
+                SignIn.logSignIn();
+                return res = Parameters.res;
+    }
 
         try {
             wait.until(visibilityOfElementLocated(By.xpath(xPathFindElement1)));
@@ -102,7 +113,7 @@ public class BondChat {
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Чат работает " + s;
+        String result = date.toString() + " Чат работает " + s + res;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -120,7 +131,7 @@ public class BondChat {
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Чат не восстановился на протяжении 10 попыток ";
+        String result = date.toString() + " Чат не восстановился на протяжении 10 попыток " + res;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -158,7 +169,7 @@ public class BondChat {
                 }
                 mess.setRecipients(Message.RecipientType.TO, dests);
                 mess.setSubject("Чат на проде BondStreet упал ");
-                mess.setText("Чат на проде упал BondStreet. Время:  " + date.toString());
+                mess.setText("Чат на проде упал BondStreet. Время: " + res + date.toString());
                 Transport.send(mess);
 
             } catch (Exception ex) {

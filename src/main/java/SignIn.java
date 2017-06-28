@@ -19,8 +19,8 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class SignIn {
 
-    String s;
-    String logFileName = "C:\\work\\log_signIn.txt";
+    static String s;
+    static String logFileName = "C:\\work\\log_signIn.txt";
     String xPathFirstClick = "//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a";
 
     public String signIn() throws IOException, MessagingException, InterruptedException {
@@ -29,7 +29,7 @@ public class SignIn {
             DesiredCapabilities capabilities = DesiredCapabilities.firefox();
             capabilities.setCapability("marionette", true);
             WebDriver driver = new FirefoxDriver(capabilities);
-            WebDriverWait wait = new WebDriverWait(driver, 20);
+            WebDriverWait wait = new WebDriverWait(driver, 30);
 
         try {
             driver.get(Parameters.link);
@@ -84,12 +84,12 @@ public class SignIn {
             }
         }
 
-    public void logSignIn() throws IOException, MessagingException {
+    public static void logSignIn() throws IOException, MessagingException {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + s;
+        String result = date.toString() + " Авторизация успешна " + s;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;

@@ -11,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Driver;
 import java.util.Date;
 import java.util.Properties;
 
@@ -19,20 +18,23 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class BondStreet {
 
+    SignIn signIn = new SignIn();
     String s;
+    String res = " ";
     String logFileName = "C:\\work\\log_bondStreet.txt";
     String xPathFirstClick = "/html/body/div[1]/div/div[3]/div[4]/div[1]/div/div/div[1]/div[3]/div[8]/div[2]/a/span";
     String cssSecondClick = "html.scotland-yard.page-game.dev.desktop.html-landscape body footer.b-footer div.b-footer__title p a";
 
 
-    public String bondStreet() throws InterruptedException, IOException, MessagingException {
+    public String bondStreet() throws Exception {
         System.setProperty(Parameters.webDriver, Parameters.pathFileWebDriverFF);
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 //        Actions action = new Actions(driver);
 
+        try {
         driver.get(Parameters.link);
         driver.findElement(By.id(Parameters.xPathEmailField)).clear();
         driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
@@ -42,6 +44,14 @@ public class BondStreet {
         driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
         wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat)));
         driver.findElement(By.xpath(Parameters.xPathButtonChat)).click();
+        signIn.s = "OK во время теста Поиск BondStreet";
+        SignIn.logSignIn(); }
+            catch (Exception e0) {
+                driver.quit();
+                signIn.s = "BAD во время теста Поиск BondStreet";
+                SignIn.logSignIn();
+                return res = Parameters.res;
+            }
 
             try {
                 wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
@@ -86,7 +96,7 @@ public class BondStreet {
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + s;
+        String result = date.toString() + " Успешность запуска " + s + res;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -104,7 +114,7 @@ public class BondStreet {
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " игра Поиск BondStreet не восстановилась на протяжении 10 попыток ";
+        String result = date.toString() + " игра Поиск BondStreet не восстановилась на протяжении 10 попыток "+ res;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -139,7 +149,7 @@ public class BondStreet {
                     dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}
                 mess.setRecipients(Message.RecipientType.TO, dests);
                 mess.setSubject("Автотест по игре Поиск BondStreet не прошел ");
-                mess.setText("Автотест по игре Поиск BondStreet не прошел  " + date.toString());
+                mess.setText("Автотест по игре Поиск BondStreet не прошел  " + res + date.toString());
                 Transport.send(mess);
 
             }catch (Exception ex){

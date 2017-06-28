@@ -16,20 +16,22 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 public class Fool {
 
 
-
+    SignIn signIn = new SignIn();
     String s;
+    String res = " ";
     String logFileName = "C:\\work\\log_fool.txt";
     String xPathButtonGameFool = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]/a/div";
     String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]";
 
-    public String fool() throws InterruptedException {
+    public String fool() throws Exception {
         System.setProperty(Parameters.webDriver, Parameters.pathFileWebDriverFF);
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
-        WebDriverWait wait = new WebDriverWait(driver, 20);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
         Actions action = new Actions(driver);
 
+        try{
         driver.get(Parameters.link);
         driver.findElement(By.id(Parameters.xPathEmailField)).clear(); // ввод логина
         driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login); // ввод логина
@@ -39,6 +41,14 @@ public class Fool {
         driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click(); // клик на авторизоваться
         wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat))); // клик на авторизоваться
         driver.findElement(By.xpath(Parameters.xPathButtonChat)).click(); // закрыть автоматически открывающийся чат
+        signIn.s = "OK во время теста игры Дурак"; // присвоение данных для передачи в запись лога
+        SignIn.logSignIn(); } // запуск записи лога
+            catch (Exception e0) { // исключение, если не получилось try
+                driver.quit(); // закрываем драйвер
+                signIn.s = "BAD во время теста игры Дурак"; // присвоение данных для передачи в запись лога
+                SignIn.logSignIn(); // запуск записи лога
+                return res = Parameters.res; // присвоение нового занчения в переменню для записи в лог
+    }
 
         try {
             wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
@@ -98,31 +108,12 @@ public class Fool {
         }
     }
 
-    public void logFool() throws IOException, MessagingException {
+    public void logFool() throws IOException, MessagingException { // пишем лог в файл
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + s;
-        while (str != null) {
-            String lineSeparator = System.getProperty("line.separator");
-            result += lineSeparator + str;
-            str = br.readLine();
-
-        }
-        FileWriter fw = new FileWriter(logFileName);
-        fw.write(result);
-        fw.close();
-        fr.close();
-        br.close();
-    }
-
-    public void logFoolBad() throws IOException, MessagingException {
-        FileReader fr = new FileReader(logFileName);
-        BufferedReader br = new BufferedReader(fr);
-        Date date = new Date();
-        String str = br.readLine();
-        String result = date.toString() + " игра Дурак не восстановилась на протяжении 10 попыток ";
+        String result = date.toString() + " Успешность запуска " + s + res;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -135,7 +126,25 @@ public class Fool {
         br.close();
     }
 
-    public void mailFool() throws IOException, MessagingException {
+    public void logFoolBad() throws IOException, MessagingException { // пишем лог, когда все попытки неудачные
+        FileReader fr = new FileReader(logFileName);
+        BufferedReader br = new BufferedReader(fr);
+        Date date = new Date();
+        String str = br.readLine();
+        String result = date.toString() + " игра Дурак не восстановилась на протяжении 10 попыток " + res;
+        while (str != null) {
+            String lineSeparator = System.getProperty("line.separator");
+            result += lineSeparator + str;
+            str = br.readLine();
+        }
+        FileWriter fw = new FileWriter(logFileName);
+        fw.write(result);
+        fw.close();
+        fr.close();
+        br.close();
+    }
+
+    public void mailFool() throws IOException, MessagingException { // отправка уведомления о проблеме на почту
         if (s == "OK") ;
         else if (s == "BAD") {
             Date date = new Date();
@@ -160,7 +169,7 @@ public class Fool {
                 }
                 mess.setRecipients(Message.RecipientType.TO, dests);
                 mess.setSubject("Автоест по игре Дурак не прошел ");
-                mess.setText("Автоест по игре Дурак не прошел  " + date.toString());
+                mess.setText("Автоест по игре Дурак не прошел  " + res + date.toString());
                 Transport.send(mess);
             } catch (Exception ex) {
                 System.out.println("что то не то");
@@ -168,7 +177,7 @@ public class Fool {
         }
     }
 
-    public void mailFoolOk() throws IOException, MessagingException {
+    public void mailFoolOk() throws IOException, MessagingException { // отправка уведомления на почту если работа восстановлена
 
         Date date = new Date();
         Properties props = new Properties();
