@@ -1,3 +1,4 @@
+import com.mysql.fabric.jdbc.FabricMySQLDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,16 +10,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.*;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.Properties;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class Fool {
 
-
+    Date date = new Date();
     SignIn signIn = new SignIn();
     String s;
-    String res = " ";
+    String note = " ";
     String logFileName = "C:\\work\\log_fool.txt";
     String xPathButtonGameFool = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]/a/div";
     String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]";
@@ -47,7 +52,7 @@ public class Fool {
                 driver.quit(); // закрываем драйвер
                 signIn.s = "BAD во время теста игры Дурак"; // присвоение данных для передачи в запись лога
                 SignIn.logSignIn(); // запуск записи лога
-                return res = Parameters.res; // присвоение нового занчения в переменню для записи в лог
+                return note = Parameters.res; // присвоение нового занчения в переменню для записи в лог
     }
 
         try {
@@ -111,9 +116,8 @@ public class Fool {
     public void logFool() throws IOException, MessagingException { // пишем лог в файл
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
-        Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + s + res;
+        String result = date.toString() + " Успешность запуска " + s + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -129,9 +133,8 @@ public class Fool {
     public void logFoolBad() throws IOException, MessagingException { // пишем лог, когда все попытки неудачные
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
-        Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " игра Дурак не восстановилась на протяжении 10 попыток " + res;
+        String result = date.toString() + " игра Дурак не восстановилась на протяжении 10 попыток " + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -147,7 +150,6 @@ public class Fool {
     public void mailFool() throws IOException, MessagingException { // отправка уведомления о проблеме на почту
         if (s == "OK") ;
         else if (s == "BAD") {
-            Date date = new Date();
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
@@ -169,7 +171,7 @@ public class Fool {
                 }
                 mess.setRecipients(Message.RecipientType.TO, dests);
                 mess.setSubject("Автоест по игре Дурак не прошел ");
-                mess.setText("Автоест по игре Дурак не прошел  " + res + date.toString());
+                mess.setText("Автоест по игре Дурак не прошел  " + note + date.toString());
                 Transport.send(mess);
             } catch (Exception ex) {
                 System.out.println("что то не то");
@@ -179,7 +181,6 @@ public class Fool {
 
     public void mailFoolOk() throws IOException, MessagingException { // отправка уведомления на почту если работа восстановлена
 
-        Date date = new Date();
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -205,6 +206,28 @@ public class Fool {
             Transport.send(mess);
 
         } catch (Exception ex) {
+            System.out.println("что то не то");
+        }
+    }
+    public void writeDB() throws IOException {
+
+        Connection connection;
+        PreparedStatement preparedStatement;
+
+        try {
+            Driver driver = new FabricMySQLDriver();
+            DriverManager.registerDriver(driver);
+            connection = DriverManager.getConnection(Parameters.URL, Parameters.Username, Parameters.Password);
+            preparedStatement = connection.prepareStatement(Parameters.INSERT_NEW);
+            preparedStatement.setLong(1, 0);
+            preparedStatement.setString(2,"Fool");
+            preparedStatement.setString(3, s);
+            preparedStatement.setString(4, note);
+            preparedStatement.setString(5, date.toString());
+            preparedStatement.setLong(6, date.getTime());
+            preparedStatement.executeUpdate();
+
+        }catch (Exception ex){
             System.out.println("что то не то");
         }
     }

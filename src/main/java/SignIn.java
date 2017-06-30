@@ -1,3 +1,4 @@
+import com.mysql.fabric.jdbc.FabricMySQLDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -11,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.*;
 import java.util.Date;
 import java.util.Properties;
 
@@ -25,11 +27,11 @@ public class SignIn {
 
     public String signIn() throws IOException, MessagingException, InterruptedException {
 
-            System.setProperty(Parameters.webDriver, Parameters.pathFileWebDriverFF);
-            DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-            capabilities.setCapability("marionette", true);
-            WebDriver driver = new FirefoxDriver(capabilities);
-            WebDriverWait wait = new WebDriverWait(driver, 30);
+        System.setProperty(Parameters.webDriver, Parameters.pathFileWebDriverFF);
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+        capabilities.setCapability("marionette", true);
+        WebDriver driver = new FirefoxDriver(capabilities);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
         try {
             driver.get(Parameters.link);
@@ -45,8 +47,24 @@ public class SignIn {
             driver.quit();
             return this.s = "OK";
 
-            } catch (Exception e) {
+        } catch (Exception e) {
+            try {
+                driver.get(Parameters.link);
+                driver.findElement(By.id(Parameters.xPathEmailField)).clear();
+                driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
+                driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear();
+                driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
+                Thread.sleep(3000);
+                driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
+                wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
+                driver.findElement(By.xpath(xPathFirstClick)).click();
+                Thread.sleep(3000);
+                driver.quit();
+                return this.s = "OK";
+
+            } catch (Exception e1) {
                 try {
+                    Thread.sleep(20000);
                     driver.get(Parameters.link);
                     driver.findElement(By.id(Parameters.xPathEmailField)).clear();
                     driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
@@ -60,29 +78,13 @@ public class SignIn {
                     driver.quit();
                     return this.s = "OK";
 
-                } catch (Exception e1) {
-                    try {
-                        Thread.sleep(20000);
-                        driver.get(Parameters.link);
-                        driver.findElement(By.id(Parameters.xPathEmailField)).clear();
-                        driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
-                        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear();
-                        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
-                        Thread.sleep(3000);
-                        driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
-                        wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
-                        driver.findElement(By.xpath(xPathFirstClick)).click();
-                        Thread.sleep(3000);
-                        driver.quit();
-                        return this.s = "OK";
-
-                    } catch (Exception e2) {
-                        driver.quit();
-                        return this.s = "BAD";
-                    }
+                } catch (Exception e2) {
+                    driver.quit();
+                    return this.s = "BAD";
                 }
             }
         }
+    }
 
     public static void logSignIn() throws IOException, MessagingException {
         FileReader fr = new FileReader(logFileName);
@@ -122,7 +124,7 @@ public class SignIn {
 
     public void mailSignIn() throws IOException, MessagingException {
         if (s == "OK") ;
-        else if (s == "BAD"){
+        else if (s == "BAD") {
             Date date = new Date();
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -132,20 +134,23 @@ public class SignIn {
             props.put("mail.smtp.port", "465");
             Session s = Session.getDefaultInstance(props, new Authenticator() {
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication(Parameters.sendMail, Parameters.sendMailPassword); }});
-            try{
+                    return new PasswordAuthentication(Parameters.sendMail, Parameters.sendMailPassword);
+                }
+            });
+            try {
                 Message mess = new MimeMessage(s);
                 mess.setFrom(new InternetAddress(Parameters.sendMail));
                 String[] emails = Parameters.sendToMail;
                 InternetAddress dests[] = new InternetAddress[emails.length];
-                for(int i=0; i<emails.length; i++){
-                    dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}
+                for (int i = 0; i < emails.length; i++) {
+                    dests[i] = new InternetAddress(emails[i].trim().toLowerCase());
+                }
                 mess.setRecipients(Message.RecipientType.TO, dests);
                 mess.setSubject("Автотест по авторизации на BondStreet не прошел ");
                 mess.setText("Автотест по авторизации на BondStreet не прошел  " + date.toString());
                 Transport.send(mess);
 
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.out.println("что то не то");
             }
         }
@@ -161,21 +166,52 @@ public class SignIn {
         props.put("mail.smtp.port", "465");
         Session s = Session.getDefaultInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(Parameters.sendMail, Parameters.sendMailPassword); }});
-        try{
+                return new PasswordAuthentication(Parameters.sendMail, Parameters.sendMailPassword);
+            }
+        });
+        try {
             Message mess = new MimeMessage(s);
             mess.setFrom(new InternetAddress(Parameters.sendMail));
             String[] emails = Parameters.sendToMail; //
             InternetAddress dests[] = new InternetAddress[emails.length];
-            for(int i=0; i<emails.length; i++){
-                dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}
+            for (int i = 0; i < emails.length; i++) {
+                dests[i] = new InternetAddress(emails[i].trim().toLowerCase());
+            }
             mess.setRecipients(Message.RecipientType.TO, dests);
             mess.setSubject("Восстановление авторизации на BondStreet ");
             mess.setText("Восстановление авторизации на BondStreet  " + date.toString());
             Transport.send(mess);
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("что то не то");
+        }
+    }
+
+    public static void selectSQL() throws IOException {
+        Connection connection;
+        PreparedStatement preparedStatement;
+        Statement stmt;
+
+        try {
+            Driver driver = new FabricMySQLDriver();
+            DriverManager.registerDriver(driver);
+            connection = DriverManager.getConnection(Parameters.URL, Parameters.Username, Parameters.Password);
+
+            stmt = connection.createStatement();
+            ResultSet resSet = stmt.executeQuery(Parameters.SELECT);
+            while (resSet.next()) {
+                long Id = resSet.getLong("Id");
+                String Name = resSet.getString("Name");
+                String Status = resSet.getString("Status");
+                String Note = resSet.getString("Note");
+                String Date = resSet.getString("Date");
+                long TimeStamp = resSet.getLong("TimeStamp");
+                System.out.println(Id + "\t" + Name +
+                        "\t" + Status + "\t" + Note +
+                        "\t" + Date + "\t" + TimeStamp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,3 +1,4 @@
+import com.mysql.fabric.jdbc.FabricMySQLDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +12,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Date;
 import java.util.Properties;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
@@ -18,9 +23,10 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class BondChat {
 
+    Date date = new Date();
     SignIn signIn = new SignIn();
     String s;
-    String res = " ";
+    String note = " ";
     String logFileName = "C:\\work\\log_bondChat.txt";
     String nameIframe = "iframe";
     String xPathFindElement1 = "//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]";
@@ -49,7 +55,7 @@ public class BondChat {
                 driver.quit();
                 signIn.s = "BAD во время теста Чата BondStreet";
                 SignIn.logSignIn();
-                return res = Parameters.res;
+                return note = Parameters.res;
     }
 
         try {
@@ -111,9 +117,8 @@ public class BondChat {
     public void logBondChat() throws IOException, MessagingException {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
-        Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Чат работает " + s + res;
+        String result = date.toString() + " Чат работает " + s + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -129,9 +134,8 @@ public class BondChat {
     public void logBondChatBad() throws IOException, MessagingException {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
-        Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Чат не восстановился на протяжении 10 попыток " + res;
+        String result = date.toString() + " Чат не восстановился на протяжении 10 попыток " + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -148,7 +152,6 @@ public class BondChat {
         if (s == "OK") ;
         else if (s == "BAD") {
             Properties props = new Properties();
-            Date date = new Date();
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -169,7 +172,7 @@ public class BondChat {
                 }
                 mess.setRecipients(Message.RecipientType.TO, dests);
                 mess.setSubject("Чат на проде BondStreet упал ");
-                mess.setText("Чат на проде упал BondStreet. Время: " + res + date.toString());
+                mess.setText("Чат на проде упал BondStreet. Время: " + note + date.toString());
                 Transport.send(mess);
 
             } catch (Exception ex) {
@@ -180,7 +183,6 @@ public class BondChat {
 
     public void mailBondChatOk() throws IOException, MessagingException {
 
-        Date date = new Date();
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -204,6 +206,29 @@ public class BondChat {
             mess.setSubject("Восстановление чата на проде BondStreet ");
             mess.setText("Восстановление чата на проде BondStreet  " + date.toString());
             Transport.send(mess);
+
+        }catch (Exception ex){
+            System.out.println("что то не то");
+        }
+    }
+
+    public void writeDB() throws IOException {
+
+        Connection connection;
+        PreparedStatement preparedStatement;
+
+        try {
+            Driver driver = new FabricMySQLDriver();
+            DriverManager.registerDriver(driver);
+            connection = DriverManager.getConnection(Parameters.URL, Parameters.Username, Parameters.Password);
+            preparedStatement = connection.prepareStatement(Parameters.INSERT_NEW);
+            preparedStatement.setLong(1, 0);
+            preparedStatement.setString(2,"Chat");
+            preparedStatement.setString(3, s);
+            preparedStatement.setString(4, note);
+            preparedStatement.setString(5, date.toString());
+            preparedStatement.setLong(6, date.getTime());
+            preparedStatement.executeUpdate();
 
         }catch (Exception ex){
             System.out.println("что то не то");

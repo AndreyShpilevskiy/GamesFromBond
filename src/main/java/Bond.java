@@ -7,31 +7,13 @@ public class Bond {
 
         while (a == 1) {
 
+            bondChat();
             findBondStreet();
             fool();
-            bondChat();
+
+//            SignIn.selectSQL();
 
         Thread.sleep(3600000);
-        }
-    }
-
-    public static void findBondStreet() throws Exception {
-        BondStreet gameBondStreet = new BondStreet();
-        gameBondStreet.bondStreet();
-        gameBondStreet.logBondStreet();
-        gameBondStreet.mailBondStreet();
-
-        if (gameBondStreet.s == "BAD") {
-            for (gameBondStreet.s.equals("BAD"); i < 10; i++) {
-                if (gameBondStreet.s == "BAD") {
-                    gameBondStreet.bondStreet();
-                    gameBondStreet.logBondStreet();
-                }
-            }
-            if (gameBondStreet.s == "OK") {
-                gameBondStreet.mailBondStreetOk();
-            }
-            else gameBondStreet.logBondStreetBad();
         }
     }
 
@@ -39,6 +21,7 @@ public class Bond {
         Fool gameFool = new Fool();
         gameFool.fool();
         gameFool.logFool();
+        gameFool.writeDB();
         gameFool.mailFool();
 
         if(gameFool.s == "BAD") {
@@ -55,10 +38,32 @@ public class Bond {
         }
     }
 
+    public static void findBondStreet() throws Exception {
+        BondStreet gameBondStreet = new BondStreet();
+        gameBondStreet.bondStreet();
+        gameBondStreet.logBondStreet();
+        gameBondStreet.writeDB();
+        gameBondStreet.mailBondStreet();
+
+        if (gameBondStreet.s == "BAD") {
+            for (gameBondStreet.s.equals("BAD"); i < 10; i++) {
+                if (gameBondStreet.s == "BAD") {
+                    gameBondStreet.bondStreet();
+                    gameBondStreet.logBondStreet();
+                }
+            }
+            if (gameBondStreet.s == "OK") {
+                gameBondStreet.mailBondStreetOk();
+            }
+            else gameBondStreet.logBondStreetBad();
+        }
+    }
+
     public static void bondChat() throws Exception {
         BondChat gameBondChat = new BondChat();
         gameBondChat.bondChat();
         gameBondChat.logBondChat();
+        gameBondChat.writeDB();
         gameBondChat.mailBondChat();
 
         if(gameBondChat.s == "BAD") {

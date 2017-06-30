@@ -1,7 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.*;
@@ -11,18 +10,22 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.*;
 import java.util.Date;
 import java.util.Properties;
+import com.mysql.fabric.jdbc.FabricMySQLDriver;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class BondStreet {
+    Date date = new Date();
 
+    long time;
     SignIn signIn = new SignIn();
     String s;
-    String res = " ";
+    String note = " ";
     String logFileName = "C:\\work\\log_bondStreet.txt";
-    String xPathFirstClick = "/html/body/div[1]/div/div[3]/div[4]/div[1]/div/div/div[1]/div[3]/div[8]/div[2]/a/span";
+    String xPathFirstClick = "/html/body/div[1]/div/div[3]/div[4]/div[1]/div/div/div[1]/div[5]/div[8]/div[2]/a/span";
     String cssSecondClick = "html.scotland-yard.page-game.dev.desktop.html-landscape body footer.b-footer div.b-footer__title p a";
 
 
@@ -50,7 +53,7 @@ public class BondStreet {
                 driver.quit();
                 signIn.s = "BAD во время теста Поиск BondStreet";
                 SignIn.logSignIn();
-                return res = Parameters.res;
+                return note = Parameters.res;
             }
 
             try {
@@ -94,9 +97,8 @@ public class BondStreet {
     public void logBondStreet() throws IOException, MessagingException {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
-        Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + s + res;
+        String result = date.toString() + " Успешность запуска " + s + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -112,9 +114,8 @@ public class BondStreet {
     public void logBondStreetBad() throws IOException, MessagingException {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
-        Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " игра Поиск BondStreet не восстановилась на протяжении 10 попыток "+ res;
+        String result = date.toString() + " игра Поиск BondStreet не восстановилась на протяжении 10 попыток "+ note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -130,7 +131,7 @@ public class BondStreet {
     public void mailBondStreet() throws IOException, MessagingException {
         if (s == "OK") ;
         else if (s == "BAD"){
-            Date date = new Date();
+
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
@@ -149,7 +150,7 @@ public class BondStreet {
                     dests[i]=new InternetAddress(emails[i].trim().toLowerCase());}
                 mess.setRecipients(Message.RecipientType.TO, dests);
                 mess.setSubject("Автотест по игре Поиск BondStreet не прошел ");
-                mess.setText("Автотест по игре Поиск BondStreet не прошел  " + res + date.toString());
+                mess.setText("Автотест по игре Поиск BondStreet не прошел  " + note + date.toString());
                 Transport.send(mess);
 
             }catch (Exception ex){
@@ -159,7 +160,7 @@ public class BondStreet {
     }
 
     public void mailBondStreetOk() throws IOException, MessagingException {
-            Date date = new Date();
+
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
@@ -185,6 +186,29 @@ public class BondStreet {
                 System.out.println("что то не то");
             }
         }
+
+    public void writeDB() throws IOException {
+
+        Connection connection;
+        PreparedStatement preparedStatement;
+
+        try {
+            Driver driver = new FabricMySQLDriver();
+            DriverManager.registerDriver(driver);
+            connection = DriverManager.getConnection(Parameters.URL, Parameters.Username, Parameters.Password);
+            preparedStatement = connection.prepareStatement(Parameters.INSERT_NEW);
+            preparedStatement.setLong(1, 0);
+            preparedStatement.setString(2,"FindBondstreet");
+            preparedStatement.setString(3, s);
+            preparedStatement.setString(4, note);
+            preparedStatement.setString(5, date.toString());
+            preparedStatement.setLong(6, time = date.getTime());
+            preparedStatement.executeUpdate();
+
+        }catch (Exception ex){
+            System.out.println("что то не то");
+        }
+    }
 }
 
 
