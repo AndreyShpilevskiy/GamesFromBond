@@ -5,9 +5,9 @@
 public class Parameters {
 
     // Авторизация
-    static String link = "https://www.bondstreet.ru/";
-    static String login = "vkfbok@mail.ru";
-    static String password = "11111111";
+    static String link = "ЛОГИН/ПАРОЛЬ";
+    static String login = "ЛОГИН/ПАРОЛЬ";
+    static String password = "ЛОГИН/ПАРОЛЬ";
     static String xPathLoginButton = "button.btn--red.btn--x3.login_button";
     static String xPathEmailField = "main-email";
     static String xPathPasswordField = "input.auth-password";
@@ -31,9 +31,9 @@ public class Parameters {
     static String res = " cant authorization BondStreet ";
 
     //SQL
-    static final String URL = "jdbc:mysql://185.69.152.87:3306";
-    static final String Username = "dvlptest";
-    static final String Password = "dvlptest";
+    static final String URL = "ЛОГИН/ПАРОЛЬ";
+    static final String Username = "ЛОГИН/ПАРОЛЬ";
+    static final String Password = "ЛОГИН/ПАРОЛЬ";
     static final String INSERT_NEW = "INSERT INTO dvlptest.BondStreet VALUES(?, ?, ? , ? , ?, ?);";
     static final String SELECT = "select * from dvlptest.BondStreet;";
 

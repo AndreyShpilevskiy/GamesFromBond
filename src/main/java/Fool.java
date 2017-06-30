@@ -209,7 +209,7 @@ public class Fool {
             System.out.println("что то не то");
         }
     }
-    public void writeDB() throws IOException {
+    public void writeDB() throws IOException { // пишем данные в БД MySQL
 
         Connection connection;
         PreparedStatement preparedStatement;
@@ -224,7 +224,7 @@ public class Fool {
             preparedStatement.setString(3, s);
             preparedStatement.setString(4, note);
             preparedStatement.setString(5, date.toString());
-            preparedStatement.setLong(6, date.getTime());
+            preparedStatement.setLong(6, date.getTime()); //преобразование даты и времени в TimeStamp
             preparedStatement.executeUpdate();
 
         }catch (Exception ex){
