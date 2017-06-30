@@ -18,17 +18,17 @@ import java.util.Date;
 import java.util.Properties;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
-public class Fool {
+public class Lotto {
 
     Date date = new Date();
     SignIn signIn = new SignIn();
     String s;
     String note = " ";
-    String logFileName = "C:\\work\\log_fool.txt";
-    String xPathButtonGameFool = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]/a/div";
-    String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]";
+    String logFileName = "C:\\work\\log_lotto.txt";
+    String xPathButtonGameLotto = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[2]/a";
+    String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[2]";
 
-    public String fool() throws Exception {
+    public String lotto() throws Exception {
         System.setProperty(Parameters.webDriver, Parameters.pathFileWebDriverFF);
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
@@ -37,24 +37,24 @@ public class Fool {
         Actions action = new Actions(driver);
 
         try{
-        driver.get(Parameters.link);
-        driver.findElement(By.id(Parameters.xPathEmailField)).clear(); // ввод логина
-        driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login); // ввод логина
-        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear(); // ввод пароля
-        driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password); //ввод пароля
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click(); // клик на авторизоваться
-        wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat))); // клик на авторизоваться
-        driver.findElement(By.xpath(Parameters.xPathButtonChat)).click(); // закрыть автоматически открывающийся чат
-        signIn.s = "OK во время теста игры Дурак"; // присвоение данных для передачи в запись лога
-        SignIn.logSignIn(); } // запуск записи лога
-            catch (Exception e0) { // исключение, если не получилось try
-                s = "BAD";
-                driver.quit(); // закрываем драйвер
-                signIn.s = "BAD во время теста игры Дурак"; // присвоение данных для передачи в запись лога
-                SignIn.logSignIn(); // запуск записи лога
-                return note = Parameters.res; // присвоение нового занчения в переменню для записи в лог
-    }
+            driver.get(Parameters.link);
+            driver.findElement(By.id(Parameters.xPathEmailField)).clear(); // ввод логина
+            driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login); // ввод логина
+            driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear(); // ввод пароля
+            driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password); //ввод пароля
+            Thread.sleep(3000);
+            driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click(); // клик на авторизоваться
+            wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat))); // клик на авторизоваться
+            driver.findElement(By.xpath(Parameters.xPathButtonChat)).click(); // закрыть автоматически открывающийся чат
+            signIn.s = "OK во время теста игры Лото"; // присвоение данных для передачи в запись лога
+            SignIn.logSignIn(); } // запуск записи лога
+        catch (Exception e0) { // исключение, если не получилось try
+            s = "BAD";
+            driver.quit(); // закрываем драйвер
+            signIn.s = "BAD во время теста игры Лото"; // присвоение данных для передачи в запись лога
+            SignIn.logSignIn(); // запуск записи лога
+            return note = Parameters.res; // присвоение нового занчения в переменню для записи в лог
+        }
 
         try {
             wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
@@ -65,8 +65,8 @@ public class Fool {
             Thread.sleep(2000);
             action.build();
             action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div), поле с кнопкой Дурак
-            wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFool))); // клик на кнопку Дурак, которая появилась после ховера
-            driver.findElement(By.xpath(xPathButtonGameFool)).click(); // клик на кнопку Дурак, которая появилась после ховера
+            wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameLotto))); // клик на кнопку Дурак, которая появилась после ховера
+            driver.findElement(By.xpath(xPathButtonGameLotto)).click(); // клик на кнопку Дурак, которая появилась после ховера
             Thread.sleep(2000);
             driver.quit();
             return this.s = "OK";
@@ -81,8 +81,8 @@ public class Fool {
                 Thread.sleep(2000);
                 action.build();
                 action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div) поле с кнопкой Дурак
-                wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFool))); // клик на кнопку Дурак, которая появилась после ховера
-                driver.findElement(By.xpath(xPathButtonGameFool)).click(); // клик на кнопку Дурак, которая появилась после ховера
+                wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameLotto))); // клик на кнопку Дурак, которая появилась после ховера
+                driver.findElement(By.xpath(xPathButtonGameLotto)).click(); // клик на кнопку Дурак, которая появилась после ховера
 
                 Thread.sleep(2000);
                 driver.quit();
@@ -99,8 +99,8 @@ public class Fool {
                     Thread.sleep(2000);
                     action.build();
                     action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div) поле с кнопкой Дурак
-                    wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFool))); // клик на кнопку Дурак, которая появилась после ховера
-                    driver.findElement(By.xpath(xPathButtonGameFool)).click(); // клик на кнопку Дурак, которая появилась после ховера
+                    wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameLotto))); // клик на кнопку Дурак, которая появилась после ховера
+                    driver.findElement(By.xpath(xPathButtonGameLotto)).click(); // клик на кнопку Дурак, которая появилась после ховера
 
                     Thread.sleep(2000);
                     driver.quit();
@@ -114,7 +114,7 @@ public class Fool {
         }
     }
 
-    public void logFool() throws IOException, MessagingException { // пишем лог в файл
+    public void logLotto() throws IOException, MessagingException { // пишем лог в файл
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
@@ -131,11 +131,11 @@ public class Fool {
         br.close();
     }
 
-    public void logFoolBad() throws IOException, MessagingException { // пишем лог, когда все попытки неудачные
+    public void logLottoBad() throws IOException, MessagingException { // пишем лог, когда все попытки неудачные
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " игра Дурак не восстановилась на протяжении 10 попыток " + note;
+        String result = date.toString() + " игра Лото не восстановилась на протяжении 10 попыток " + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -149,7 +149,7 @@ public class Fool {
     }
 
     Properties props = new Properties();
-    public void mailFool() throws IOException, MessagingException { // отправка уведомления о проблеме на почту
+    public void mailLotto() throws IOException, MessagingException { // отправка уведомления о проблеме на почту
         if (s == "OK") ;
         else if (s == "BAD") {
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -171,8 +171,8 @@ public class Fool {
                     dests[i] = new InternetAddress(emails[i].trim().toLowerCase());
                 }
                 mess.setRecipients(Message.RecipientType.TO, dests);
-                mess.setSubject("Автоест по игре Дурак не прошел ");
-                mess.setText("Автоест по игре Дурак не прошел  " + note + date.toString());
+                mess.setSubject("Автоест по игре Лото не прошел ");
+                mess.setText("Автоест по игре Лото не прошел  " + note + date.toString());
                 Transport.send(mess);
             } catch (Exception ex) {
                 System.out.println("что то не то");
@@ -180,7 +180,7 @@ public class Fool {
         }
     }
 
-    public void mailFoolOk() throws IOException, MessagingException { // отправка уведомления на почту если работа восстановлена
+    public void mailLottoOk() throws IOException, MessagingException { // отправка уведомления на почту если работа восстановлена
 
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -201,8 +201,8 @@ public class Fool {
                 dests[i] = new InternetAddress(emails[i].trim().toLowerCase());
             }
             mess.setRecipients(Message.RecipientType.TO, dests);
-            mess.setSubject("Восстановление игры Дурак ");
-            mess.setText("Восстановление игры Дурак  " + date.toString());
+            mess.setSubject("Восстановление игры Лото ");
+            mess.setText("Восстановление игры Лото  " + date.toString());
             Transport.send(mess);
 
         } catch (Exception ex) {
@@ -220,7 +220,7 @@ public class Fool {
             connection = DriverManager.getConnection(Parameters.URL, Parameters.Username, Parameters.Password);
             preparedStatement = connection.prepareStatement(Parameters.INSERT_NEW);
             preparedStatement.setLong(1, 0);
-            preparedStatement.setString(2,"Fool");
+            preparedStatement.setString(2,"Lotto");
             preparedStatement.setString(3, s);
             preparedStatement.setString(4, note);
             preparedStatement.setString(5, date.toString());
@@ -232,5 +232,3 @@ public class Fool {
         }
     }
 }
-
-

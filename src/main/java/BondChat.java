@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.*;
@@ -25,8 +26,8 @@ public class BondChat {
 
     Date date = new Date();
     SignIn signIn = new SignIn();
-    String s;
-    String note = " ";
+    String s ;
+    static String note = " ";
     String logFileName = "C:\\work\\log_bondChat.txt";
     String nameIframe = "iframe";
     String xPathFindElement1 = "//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]";
@@ -52,12 +53,13 @@ public class BondChat {
         signIn.s = "OK во время теста Чата BondStreet";
         SignIn.logSignIn(); }
             catch (Exception e0) {
+                s = "BAD";
                 driver.quit();
                 signIn.s = "BAD во время теста Чата BondStreet";
                 SignIn.logSignIn();
-                return note = Parameters.res;
-    }
+                return this.note = Parameters.res;
 
+                }
         try {
             wait.until(visibilityOfElementLocated(By.xpath(xPathFindElement1)));
             Thread.sleep(5000);
@@ -172,7 +174,7 @@ public class BondChat {
                 }
                 mess.setRecipients(Message.RecipientType.TO, dests);
                 mess.setSubject("Чат на проде BondStreet упал ");
-                mess.setText("Чат на проде упал BondStreet. Время: " + note + date.toString());
+                mess.setText("Чат на проде упал BondStreet . Время: " + date.toString()+ note);
                 Transport.send(mess);
 
             } catch (Exception ex) {

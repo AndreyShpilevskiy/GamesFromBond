@@ -1,6 +1,9 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.*;
@@ -27,6 +30,8 @@ public class BondStreet {
     String logFileName = "C:\\work\\log_bondStreet.txt";
     String xPathFirstClick = "/html/body/div[1]/div/div[3]/div[4]/div[1]/div/div/div[1]/div[5]/div[8]/div[2]/a/span";
     String cssSecondClick = "html.scotland-yard.page-game.dev.desktop.html-landscape body footer.b-footer div.b-footer__title p a";
+    String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[12]";
+    String xPathButtonGameFindBondStreet = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[12]/a/div";
 
 
     public String bondStreet() throws Exception {
@@ -35,7 +40,7 @@ public class BondStreet {
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
         WebDriverWait wait = new WebDriverWait(driver, 30);
-//        Actions action = new Actions(driver);
+        Actions action = new Actions(driver);
 
         try {
         driver.get(Parameters.link);
@@ -50,6 +55,7 @@ public class BondStreet {
         signIn.s = "OK во время теста Поиск BondStreet";
         SignIn.logSignIn(); }
             catch (Exception e0) {
+                s = "BAD";
                 driver.quit();
                 signIn.s = "BAD во время теста Поиск BondStreet";
                 SignIn.logSignIn();
@@ -57,8 +63,16 @@ public class BondStreet {
             }
 
             try {
-                wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
-                driver.findElement(By.xpath(xPathFirstClick)).click();
+                wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
+                driver.findElement(By.xpath(Parameters.xPathButtonGame)).click(); // вход в раздел Игры
+                Thread.sleep(2000);
+                WebElement element = driver.findElement(By.xpath(elementHover)); // скролл на элемент(div) поле с кнопкой Бондстриит
+                ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element); // скролл на элемент(div), поле с кнопкой Бондстриит
+                Thread.sleep(2000);
+                action.build();
+                action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div), поле с кнопкой Бондстриит
+                wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFindBondStreet))); // клик на кнопку Бондстриит, которая появилась после ховера
+                driver.findElement(By.xpath(xPathButtonGameFindBondStreet)).click(); // клик на кнопку Бондстриит, которая появилась после ховера
                 wait.until(visibilityOfElementLocated(By.cssSelector(cssSecondClick)));
                 driver.findElement(By.cssSelector(cssSecondClick));
                 Thread.sleep(2000);
@@ -67,8 +81,16 @@ public class BondStreet {
 
             } catch (Exception e) {
                 try {
-                    wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
-                    driver.findElement(By.xpath(xPathFirstClick)).click();
+                    wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
+                    driver.findElement(By.xpath(Parameters.xPathButtonGame)).click(); // вход в раздел Игры
+                    Thread.sleep(2000);
+                    WebElement element = driver.findElement(By.xpath(elementHover)); // скролл на элемент(div) поле с кнопкой Бондстриит
+                    ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element); // скролл на элемент(div), поле с кнопкой Бондстриит
+                    Thread.sleep(2000);
+                    action.build();
+                    action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div), поле с кнопкой Бондстриит
+                    wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFindBondStreet))); // клик на кнопку Бондстриит, которая появилась после ховера
+                    driver.findElement(By.xpath(xPathButtonGameFindBondStreet)).click(); // клик на кнопку Бондстриит, которая появилась после ховера
                     wait.until(visibilityOfElementLocated(By.cssSelector(cssSecondClick)));
                     driver.findElement(By.cssSelector(cssSecondClick));
                     Thread.sleep(2000);
@@ -78,9 +100,16 @@ public class BondStreet {
                 } catch (Exception e1) {
                     try {
                         Thread.sleep(20000);
-                        wait.until(visibilityOfElementLocated(By.xpath(xPathFirstClick)));
-                        driver.findElement(By.xpath(xPathFirstClick)).click();
-                        wait.until(visibilityOfElementLocated(By.cssSelector(cssSecondClick)));
+                        wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
+                        driver.findElement(By.xpath(Parameters.xPathButtonGame)).click(); // вход в раздел Игры
+                        Thread.sleep(2000);
+                        WebElement element = driver.findElement(By.xpath(elementHover)); // скролл на элемент(div) поле с кнопкой Бондстриит
+                        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();",element); // скролл на элемент(div), поле с кнопкой Бондстриит
+                        Thread.sleep(2000);
+                        action.build();
+                        action.moveToElement(driver.findElement(By.xpath(elementHover))).perform(); // ховер на элемент(div), поле с кнопкой Бондстриит
+                        wait.until(visibilityOfElementLocated(By.xpath(xPathButtonGameFindBondStreet))); // клик на кнопку Бондстриит, которая появилась после ховера
+                        driver.findElement(By.xpath(xPathButtonGameFindBondStreet)).click(); // клик на кнопку Бондстриит, которая появилась после ховераcondClick)));
                         driver.findElement(By.cssSelector(cssSecondClick));
                         Thread.sleep(2000);
                         driver.quit();
