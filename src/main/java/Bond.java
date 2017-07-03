@@ -14,7 +14,7 @@ public class Bond {
 
 //            SignIn.selectSQL();
 
-        Thread.sleep(6000);
+        Thread.sleep(600000);
         }
     }
 
@@ -34,6 +34,7 @@ public class Bond {
             }
             if (gameBondChat.s == "OK") {
                 BondChat.note = Parameters.resOk;
+                gameBondChat.s = "OK";
                 gameBondChat.mailBondChatOk();
                 gameBondChat.writeDB();
             }
@@ -57,6 +58,7 @@ public class Bond {
             }
             if (gameBondStreet.s == "OK") {
                 gameBondStreet.note = Parameters.resOk;
+                gameBondStreet.s = "OK";
                 gameBondStreet.mailBondStreetOk();
                 gameBondStreet.writeDB();
             }
@@ -80,11 +82,11 @@ public class Bond {
             }
             if (gameFool.s == "OK") {
                 gameFool.note = Parameters.resOk;
+                gameFool.s = "OK";
                 gameFool.mailFoolOk();
                 gameFool.writeDB();
             }
             else gameFool.logFoolBad();
-            gameFool.writeDB();
         }
     }
 
@@ -104,6 +106,7 @@ public class Bond {
             }
             if (gameLotto.s == "OK") {
                 gameLotto.note = Parameters.resOk;
+                gameLotto.s = "OK";
                 gameLotto.mailLottoOk();
                 gameLotto.writeDB();
             }

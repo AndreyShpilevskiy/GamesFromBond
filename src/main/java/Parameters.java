@@ -5,9 +5,9 @@
 public class Parameters {
 
     // Авторизация
-    static String link = "Логин/Пароль";
-    static String login = "Логин/Пароль";
-    static String password = "Логин/Пароль";
+    static String link = "https://www.bondstreet.ru/";
+    static String login = "vkfbok@mail.ru";
+    static String password = "11111111";
     static String xPathLoginButton = "button.btn--red.btn--x3.login_button";
     static String xPathEmailField = "main-email";
     static String xPathPasswordField = "input.auth-password";
@@ -23,18 +23,18 @@ public class Parameters {
     static String pathFileWebDriverFF = "C://IT/Test/geckodriver.exe";
 
     // Отправка писем
-    static String sendMail = "Логин/Пароль";
-    static String sendMailPassword = "Логин/Пароль!";
-    static String[] sendToMail = {"Логин/Пароль", "Логин/Пароль"};
+    static String sendMail = "devup2012@gmail.com";
+    static String sendMailPassword = "upupDevelup404!";
+    static String[] sendToMail = {"as@develup.pro", "ek@develup.pro"};
 
     //Note
     static String res = " cant authorization BondStreet ";
     static String resOk = " authorization after Failed ";
 
     //SQL
-    static final String URL = "Логин/Пароль";
-    static final String Username = "Логин/Пароль";
-    static final String Password = "Логин/Пароль";
+    static final String URL = "jdbc:mysql://185.69.152.87:3306";
+    static final String Username = "dvlptest";
+    static final String Password = "dvlptest";
     static final String INSERT_NEW = "INSERT INTO dvlptest.BondStreet VALUES(?, ?, ? , ? , ?, ?);";
     static final String SELECT = "select * from dvlptest.BondStreet;";
 
