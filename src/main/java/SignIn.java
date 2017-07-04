@@ -22,7 +22,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 public class SignIn {
 
     static String s;
-    static String logFileName = "C:\\work\\log_signIn.txt";
+    static String logFileName = "Files/log_signIn.txt";
     String xPathFirstClick = "//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/a";
 
     public String signIn() throws IOException, MessagingException, InterruptedException {

@@ -26,9 +26,9 @@ public class BondChat {
 
     Date date = new Date();
     SignIn signIn = new SignIn();
-    String s ;
+//    String s ;
     static String note = " ";
-    String logFileName = "C:\\work\\log_bondChat.txt";
+    String logFileName = "Files/log_bondChat.txt";
     String nameIframe = "iframe";
     String xPathFindElement1 = "//*[@id=\"mCSB_1_container\"]/div[3]/div[1]/div[3]/div[2]/div[1]";
     String xPathFirstClick = "//*[@id=\"root\"]/div/div[2]/div[1]/div/div/div/div/div[4]/span";
@@ -53,13 +53,12 @@ public class BondChat {
         signIn.s = "OK во время теста Чата BondStreet";
         SignIn.logSignIn(); }
             catch (Exception e0) {
-                s = "BAD";
+                Parameters.resChat = "BAD";
                 driver.quit();
                 signIn.s = "BAD во время теста Чата BondStreet";
                 SignIn.logSignIn();
-                return this.note = Parameters.res;
+                return this.note = Parameters.res; }
 
-                }
         try {
             wait.until(visibilityOfElementLocated(By.xpath(xPathFindElement1)));
             Thread.sleep(5000);
@@ -73,7 +72,7 @@ public class BondChat {
             driver.findElement(By.xpath(xPathSecondClick)).click();
             Thread.sleep(2000);
             driver.quit();
-            return this.s = "OK";
+            return Parameters.resChat = "OK";
 
         } catch (Exception e) {
             try {
@@ -89,7 +88,7 @@ public class BondChat {
                 driver.findElement(By.xpath(xPathSecondClick)).click();
                 Thread.sleep(2000);
                 driver.quit();
-                return this.s = "OK";
+                return Parameters.resChat = "OK";
 
             } catch (Exception e1) {
                 try {
@@ -106,11 +105,11 @@ public class BondChat {
                     driver.findElement(By.xpath(xPathSecondClick)).click();
                     Thread.sleep(2000);
                     driver.quit();
-                    return this.s = "OK";
+                    return Parameters.resChat = "OK";
 
                 } catch (Exception e2) {
                     driver.quit();
-                    return this.s = "BAD";
+                    return Parameters.resChat = "BAD";
                 }
             }
         }
@@ -120,7 +119,7 @@ public class BondChat {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Чат работает " + s + note;
+        String result = date.toString() + " Чат работает " + Parameters.resChat + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -151,8 +150,8 @@ public class BondChat {
     }
 
     public void mailBondChat() throws IOException, MessagingException {
-        if (s == "OK") ;
-        else if (s == "BAD") {
+        if (Parameters.resChat == "OK") ;
+        else if (Parameters.resChat == "BAD") {
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
@@ -226,7 +225,7 @@ public class BondChat {
             preparedStatement = connection.prepareStatement(Parameters.INSERT_NEW);
             preparedStatement.setLong(1, 0);
             preparedStatement.setString(2,"Chat");
-            preparedStatement.setString(3, s);
+            preparedStatement.setString(3, Parameters.resChat);
             preparedStatement.setString(4, note);
             preparedStatement.setString(5, date.toString());
             preparedStatement.setLong(6, date.getTime());

@@ -22,9 +22,9 @@ public class Lotto {
 
     Date date = new Date();
     SignIn signIn = new SignIn();
-    String s;
+//    String s;
     String note = " ";
-    String logFileName = "C:\\work\\log_lotto.txt";
+    String logFileName = "Files/log_lotto.txt";
     String xPathButtonGameLotto = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[2]/a";
     String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[2]";
 
@@ -46,12 +46,13 @@ public class Lotto {
             driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click(); // клик на авторизоваться
             wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat))); // клик на авторизоваться
             driver.findElement(By.xpath(Parameters.xPathButtonChat)).click(); // закрыть автоматически открывающийся чат
-            signIn.s = "OK во время теста игры Лото"; // присвоение данных для передачи в запись лога
+            signIn.s = "OK во время теста игры Лото "; // присвоение данных для передачи в запись лога
+            note = Parameters.resOk;
             SignIn.logSignIn(); } // запуск записи лога
         catch (Exception e0) { // исключение, если не получилось try
-            s = "BAD";
+            Parameters.resLotto = "BAD";
             driver.quit(); // закрываем драйвер
-            signIn.s = "BAD во время теста игры Лото"; // присвоение данных для передачи в запись лога
+            signIn.s = "BAD во время теста игры Лото "; // присвоение данных для передачи в запись лога
             SignIn.logSignIn(); // запуск записи лога
             return note = Parameters.res; // присвоение нового занчения в переменню для записи в лог
         }
@@ -69,7 +70,7 @@ public class Lotto {
             driver.findElement(By.xpath(xPathButtonGameLotto)).click(); // клик на кнопку Дурак, которая появилась после ховера
             Thread.sleep(2000);
             driver.quit();
-            return this.s = "OK";
+            return Parameters.resLotto = "OK";
 
         } catch (Exception e) {
             try {
@@ -86,7 +87,7 @@ public class Lotto {
 
                 Thread.sleep(2000);
                 driver.quit();
-                return this.s = "OK";
+                return Parameters.resLotto = "OK";
 
             } catch (Exception e1) {
                 try {
@@ -104,11 +105,11 @@ public class Lotto {
 
                     Thread.sleep(2000);
                     driver.quit();
-                    return this.s = "OK";
+                    return Parameters.resLotto = "OK";
 
                 } catch (Exception e2) {
                     driver.quit();
-                    return this.s = "BAD";
+                    return Parameters.resLotto = "BAD";
                 }
             }
         }
@@ -118,7 +119,7 @@ public class Lotto {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + s + note;
+        String result = date.toString() + " Успешность запуска " + Parameters.resLotto +" " + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -150,8 +151,8 @@ public class Lotto {
 
     Properties props = new Properties();
     public void mailLotto() throws IOException, MessagingException { // отправка уведомления о проблеме на почту
-        if (s == "OK") ;
-        else if (s == "BAD") {
+        if (Parameters.resLotto == "OK") ;
+        else if (Parameters.resLotto == "BAD") {
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -221,7 +222,7 @@ public class Lotto {
             preparedStatement = connection.prepareStatement(Parameters.INSERT_NEW);
             preparedStatement.setLong(1, 0);
             preparedStatement.setString(2,"Lotto");
-            preparedStatement.setString(3, s);
+            preparedStatement.setString(3, Parameters.resLotto);
             preparedStatement.setString(4, note);
             preparedStatement.setString(5, date.toString());
             preparedStatement.setLong(6, date.getTime()); //преобразование даты и времени в TimeStamp

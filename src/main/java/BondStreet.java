@@ -25,9 +25,9 @@ public class BondStreet {
 
     long time;
     SignIn signIn = new SignIn();
-    String s;
+//    String s;
     String note = " ";
-    String logFileName = "C:\\work\\log_bondStreet.txt";
+    String logFileName = "Files/log_bondStreet.txt";
     String xPathFirstClick = "/html/body/div[1]/div/div[3]/div[4]/div[1]/div/div/div[1]/div[5]/div[8]/div[2]/a/span";
     String cssSecondClick = "html.scotland-yard.page-game.dev.desktop.html-landscape body footer.b-footer div.b-footer__title p a";
     String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[12]";
@@ -55,7 +55,7 @@ public class BondStreet {
         signIn.s = "OK во время теста Поиск BondStreet";
         SignIn.logSignIn(); }
             catch (Exception e0) {
-                s = "BAD";
+                Parameters.resFindBondStreet = "BAD";
                 driver.quit();
                 signIn.s = "BAD во время теста Поиск BondStreet";
                 SignIn.logSignIn();
@@ -77,7 +77,7 @@ public class BondStreet {
                 driver.findElement(By.cssSelector(cssSecondClick));
                 Thread.sleep(2000);
                 driver.quit();
-                return this.s = "OK";
+                return Parameters.resFindBondStreet = "OK";
 
             } catch (Exception e) {
                 try {
@@ -95,7 +95,7 @@ public class BondStreet {
                     driver.findElement(By.cssSelector(cssSecondClick));
                     Thread.sleep(2000);
                     driver.quit();
-                    return this.s = "OK";
+                    return Parameters.resFindBondStreet = "OK";
 
                 } catch (Exception e1) {
                     try {
@@ -113,11 +113,11 @@ public class BondStreet {
                         driver.findElement(By.cssSelector(cssSecondClick));
                         Thread.sleep(2000);
                         driver.quit();
-                        return this.s = "OK";
+                        return Parameters.resFindBondStreet = "OK";
 
                     } catch (Exception e2) {
                         driver.quit();
-                        return this.s = "BAD";
+                        return Parameters.resFindBondStreet = "BAD";
                     }
                 }
             }
@@ -127,7 +127,7 @@ public class BondStreet {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + s + note;
+        String result = date.toString() + " Успешность запуска " + Parameters.resFindBondStreet + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -158,8 +158,8 @@ public class BondStreet {
     }
 
     public void mailBondStreet() throws IOException, MessagingException {
-        if (s == "OK") ;
-        else if (s == "BAD"){
+        if (Parameters.resFindBondStreet == "OK") ;
+        else if (Parameters.resFindBondStreet == "BAD"){
 
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -228,7 +228,7 @@ public class BondStreet {
             preparedStatement = connection.prepareStatement(Parameters.INSERT_NEW);
             preparedStatement.setLong(1, 0);
             preparedStatement.setString(2,"FindBondstreet");
-            preparedStatement.setString(3, s);
+            preparedStatement.setString(3, Parameters.resFindBondStreet);
             preparedStatement.setString(4, note);
             preparedStatement.setString(5, date.toString());
             preparedStatement.setLong(6, time = date.getTime());

@@ -20,16 +20,17 @@ public class Parameters {
 
     //Driver
     static String webDriver = "webdriver.gecko.driver";
-    static String pathFileWebDriverFF = "C://IT/Test/geckodriver.exe";
+    static String pathFileWebDriverFF = "Files/geckodriver.exe";
+
 
     // Отправка писем
     static String sendMail = "devup2012@gmail.com";
     static String sendMailPassword = "upupDevelup404!";
-    static String[] sendToMail = {"as@develup.pro", "ek@develup.pro"};
+    static String[] sendToMail = {"as@develup.pro"}; //, "ek@develup.pro"
 
     //Note
-    static String res = " cant authorization BondStreet ";
-    static String resOk = " authorization after Failed ";
+    static String res = "Failed";
+    static String resOk = "Passed";
 
     //SQL
     static final String URL = "jdbc:mysql://185.69.152.87:3306";
@@ -38,6 +39,10 @@ public class Parameters {
     static final String INSERT_NEW = "INSERT INTO dvlptest.BondStreet VALUES(?, ?, ? , ? , ?, ?);";
     static final String SELECT = "select * from dvlptest.BondStreet;";
 
-    static String chatStart = "OK";
+    // Start data
+    static String resChat = "OK";
+    static String resFindBondStreet = "OK";
+    static String resFool = "OK";
+    static String resLotto = "OK";
 
 }

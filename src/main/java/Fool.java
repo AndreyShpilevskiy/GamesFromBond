@@ -22,9 +22,9 @@ public class Fool {
 
     Date date = new Date();
     SignIn signIn = new SignIn();
-    String s;
+//    String s;
     String note = " ";
-    String logFileName = "C:\\work\\log_fool.txt";
+    String logFileName = "Files/log_fool.txt";
     String xPathButtonGameFool = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]/a/div";
     String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]";
 
@@ -49,7 +49,7 @@ public class Fool {
         signIn.s = "OK во время теста игры Дурак"; // присвоение данных для передачи в запись лога
         SignIn.logSignIn(); } // запуск записи лога
             catch (Exception e0) { // исключение, если не получилось try
-                s = "BAD";
+                Parameters.resFool = "BAD";
                 driver.quit(); // закрываем драйвер
                 signIn.s = "BAD во время теста игры Дурак"; // присвоение данных для передачи в запись лога
                 SignIn.logSignIn(); // запуск записи лога
@@ -69,7 +69,7 @@ public class Fool {
             driver.findElement(By.xpath(xPathButtonGameFool)).click(); // клик на кнопку Дурак, которая появилась после ховера
             Thread.sleep(2000);
             driver.quit();
-            return this.s = "OK";
+            return Parameters.resFool = "OK";
 
         } catch (Exception e) {
             try {
@@ -86,7 +86,7 @@ public class Fool {
 
                 Thread.sleep(2000);
                 driver.quit();
-                return this.s = "OK";
+                return Parameters.resFool = "OK";
 
             } catch (Exception e1) {
                 try {
@@ -104,11 +104,11 @@ public class Fool {
 
                     Thread.sleep(2000);
                     driver.quit();
-                    return this.s = "OK";
+                    return Parameters.resFool = "OK";
 
                 } catch (Exception e2) {
                     driver.quit();
-                    return this.s = "BAD";
+                    return Parameters.resFool = "BAD";
                 }
             }
         }
@@ -118,7 +118,7 @@ public class Fool {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + s + note;
+        String result = date.toString() + " Успешность запуска " + Parameters.resFool + note;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -150,8 +150,8 @@ public class Fool {
 
     Properties props = new Properties();
     public void mailFool() throws IOException, MessagingException { // отправка уведомления о проблеме на почту
-        if (s == "OK") ;
-        else if (s == "BAD") {
+        if (Parameters.resFool == "OK") ;
+        else if (Parameters.resFool == "BAD") {
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -221,7 +221,7 @@ public class Fool {
             preparedStatement = connection.prepareStatement(Parameters.INSERT_NEW);
             preparedStatement.setLong(1, 0);
             preparedStatement.setString(2,"Fool");
-            preparedStatement.setString(3, s);
+            preparedStatement.setString(3, Parameters.resFool);
             preparedStatement.setString(4, note);
             preparedStatement.setString(5, date.toString());
             preparedStatement.setLong(6, date.getTime()); //преобразование даты и времени в TimeStamp
