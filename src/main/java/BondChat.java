@@ -26,7 +26,6 @@ public class BondChat {
 
     Date date = new Date();
     SignIn signIn = new SignIn();
-//    String s ;
     static String note = " ";
     String logFileName = "Files/log_bondChat.txt";
     String nameIframe = "iframe";
@@ -51,6 +50,7 @@ public class BondChat {
         Thread.sleep(3000);
         driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
         signIn.s = "OK во время теста Чата BondStreet";
+        note = Parameters.resOk;
         SignIn.logSignIn(); }
             catch (Exception e0) {
                 Parameters.resChat = "BAD";

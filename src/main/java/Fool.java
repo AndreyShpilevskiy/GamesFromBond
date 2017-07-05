@@ -22,7 +22,6 @@ public class Fool {
 
     Date date = new Date();
     SignIn signIn = new SignIn();
-//    String s;
     String note = " ";
     String logFileName = "Files/log_fool.txt";
     String xPathButtonGameFool = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[3]/a/div";
@@ -47,6 +46,7 @@ public class Fool {
         wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat))); // клик на авторизоваться
         driver.findElement(By.xpath(Parameters.xPathButtonChat)).click(); // закрыть автоматически открывающийся чат
         signIn.s = "OK во время теста игры Дурак"; // присвоение данных для передачи в запись лога
+        note = Parameters.resOk;
         SignIn.logSignIn(); } // запуск записи лога
             catch (Exception e0) { // исключение, если не получилось try
                 Parameters.resFool = "BAD";

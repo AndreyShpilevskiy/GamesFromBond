@@ -5,9 +5,9 @@
 public class Parameters {
 
     // Авторизация
-    static String link = "https://www.bondstreet.ru/";
-    static String login = "vkfbok@mail.ru";
-    static String password = "11111111";
+    static String link = "Твои данные";
+    static String login = "Твои данные";
+    static String password = "Твои данные";
     static String xPathLoginButton = "button.btn--red.btn--x3.login_button";
     static String xPathEmailField = "main-email";
     static String xPathPasswordField = "input.auth-password";
@@ -24,18 +24,18 @@ public class Parameters {
 
 
     // Отправка писем
-    static String sendMail = "devup2012@gmail.com";
-    static String sendMailPassword = "upupDevelup404!";
-    static String[] sendToMail = {"as@develup.pro"}; //, "ek@develup.pro"
+    static String sendMail = "Твои данные";
+    static String sendMailPassword = "Твои данные";
+    static String[] sendToMail = {"Твои данные"};
 
     //Note
     static String res = "Failed";
     static String resOk = "Passed";
 
     //SQL
-    static final String URL = "jdbc:mysql://185.69.152.87:3306";
-    static final String Username = "dvlptest";
-    static final String Password = "dvlptest";
+    static final String URL = "Твои данные";
+    static final String Username = "Твои данные";
+    static final String Password = "Твои данные";
     static final String INSERT_NEW = "INSERT INTO dvlptest.BondStreet VALUES(?, ?, ? , ? , ?, ?);";
     static final String SELECT = "select * from dvlptest.BondStreet;";
 

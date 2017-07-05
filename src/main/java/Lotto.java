@@ -22,7 +22,6 @@ public class Lotto {
 
     Date date = new Date();
     SignIn signIn = new SignIn();
-//    String s;
     String note = " ";
     String logFileName = "Files/log_lotto.txt";
     String xPathButtonGameLotto = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[2]/a";

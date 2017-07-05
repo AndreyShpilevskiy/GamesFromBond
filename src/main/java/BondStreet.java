@@ -25,10 +25,8 @@ public class BondStreet {
 
     long time;
     SignIn signIn = new SignIn();
-//    String s;
     String note = " ";
     String logFileName = "Files/log_bondStreet.txt";
-    String xPathFirstClick = "/html/body/div[1]/div/div[3]/div[4]/div[1]/div/div/div[1]/div[5]/div[8]/div[2]/a/span";
     String cssSecondClick = "html.scotland-yard.page-game.dev.desktop.html-landscape body footer.b-footer div.b-footer__title p a";
     String elementHover = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[12]";
     String xPathButtonGameFindBondStreet = "/html/body/div[1]/div/div[3]/div[4]/div[2]/div[2]/div[2]/div/div[12]/a/div";
@@ -53,6 +51,7 @@ public class BondStreet {
         wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat)));
         driver.findElement(By.xpath(Parameters.xPathButtonChat)).click();
         signIn.s = "OK во время теста Поиск BondStreet";
+        note = Parameters.resOk;
         SignIn.logSignIn(); }
             catch (Exception e0) {
                 Parameters.resFindBondStreet = "BAD";

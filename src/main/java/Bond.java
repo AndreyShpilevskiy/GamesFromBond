@@ -1,7 +1,6 @@
 public class Bond {
 
     static int a = 1; // для бесконечного цикла
-    static int i; // для for,
 
     public static void main(String[] args) throws Exception {
 
@@ -14,7 +13,7 @@ public class Bond {
 
 //            SignIn.selectSQL();
 
-            Thread.sleep(600000);
+            Thread.sleep(300000);
         }
     }
 
@@ -31,7 +30,7 @@ public class Bond {
         }
 
         if (Parameters.resChat != ("OK")) {
-            for (i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
                 if (Parameters.resChat != ("OK")) gameBondChat.bondChat();
 
                 if (Parameters.resChat == "OK") {
@@ -59,7 +58,7 @@ public class Bond {
         }
 
         if (Parameters.resFindBondStreet != ("OK")) {
-            for (i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
                 if (Parameters.resFindBondStreet != ("OK")) gameBondStreet.bondStreet();
 
                 if (Parameters.resFindBondStreet == "OK") {
@@ -87,7 +86,7 @@ public class Bond {
         }
 
         if (Parameters.resFool != ("OK")) {
-            for (i =0; i < 10; i++) {
+            for (int i =0; i < 5; i++) {
                 if (Parameters.resFool != ("OK")) gameFool.fool();
 
                 if (Parameters.resFool == "OK") {
@@ -115,7 +114,7 @@ public class Bond {
         }
 
         else if (Parameters.resLotto != ("OK")) {
-            for (i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
                 if (Parameters.resLotto != ("OK")) gameLotto.lotto();
 
                 if (Parameters.resLotto == "OK") {
