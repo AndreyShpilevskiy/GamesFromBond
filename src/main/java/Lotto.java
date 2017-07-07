@@ -20,6 +20,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class Lotto {
 
+    static String[] lines;
     Date date = new Date();
     SignIn signIn = new SignIn();
     String note = " ";
@@ -32,7 +33,7 @@ public class Lotto {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, Parameters.timeOutWaitSec);
         Actions action = new Actions(driver);
 
         try{
@@ -45,6 +46,7 @@ public class Lotto {
             driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click(); // клик на авторизоваться
             wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat))); // клик на авторизоваться
             driver.findElement(By.xpath(Parameters.xPathButtonChat)).click(); // закрыть автоматически открывающийся чат
+            wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathLogoMain)));
             signIn.s = "OK во время теста игры Лото "; // присвоение данных для передачи в запись лога
             note = Parameters.resOk;
             SignIn.logSignIn(); } // запуск записи лога
@@ -90,7 +92,7 @@ public class Lotto {
 
             } catch (Exception e1) {
                 try {
-                    Thread.sleep(20000);
+                    Thread.sleep(10000);
                     wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
                     driver.findElement(By.xpath(Parameters.xPathButtonGame)).click(); // вход в раздел Игры
                     Thread.sleep(2000);
@@ -118,7 +120,7 @@ public class Lotto {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + Parameters.resLotto +" " + note;
+        String result = date.toString() + " Успешность запуска " + Parameters.resLotto +" " + note + Parameters.mail;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -129,6 +131,17 @@ public class Lotto {
         fw.close();
         fr.close();
         br.close();
+    }
+
+    public void searchStatusLotto() throws IOException {
+
+        FileInputStream fis = new FileInputStream(new File(logFileName)); // путь заменить на нужный
+        byte[] content = new byte[fis.available()];
+        fis.read(content);
+        fis.close();
+        lines = new String(content, "UTF-8").split("\n"); // кодировку указать нужную
+        if (lines[0].indexOf(" BAD ") > -1) {Parameters.resLotto = "BAD";}
+        if (lines[0].indexOf(" OK ") > -1) {Parameters.resLotto = "OK";}
     }
 
     public void logLottoBad() throws IOException, MessagingException { // пишем лог, когда все попытки неудачные
@@ -150,8 +163,13 @@ public class Lotto {
 
     Properties props = new Properties();
     public void mailLotto() throws IOException, MessagingException { // отправка уведомления о проблеме на почту
-        if (Parameters.resLotto == "OK") ;
-        else if (Parameters.resLotto == "BAD") {
+        if     (lines[0].indexOf("BAD") > -1&& lines[0].indexOf("NO") > -1&&
+                lines[1].indexOf("BAD") > -1&& lines[1].indexOf("NO") > -1&&
+                lines[2].indexOf("BAD") > -1&& lines[2].indexOf("NO") > -1&&
+                lines[3].indexOf("BAD") > -1&& lines[3].indexOf("NO") > -1&&
+                lines[4].indexOf("BAD") > -1&& lines[4].indexOf("NO") > -1&&
+                lines[5].indexOf("BAD") > -1&& lines[5].indexOf("NO") > -1)
+        {
             props.put("mail.smtp.host", "smtp.gmail.com");
             props.put("mail.smtp.socketFactory.port", "465");
             props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -174,6 +192,7 @@ public class Lotto {
                 mess.setSubject("Автоест по игре Лото не прошел ");
                 mess.setText("Автоест по игре Лото не прошел  " + note + date.toString());
                 Transport.send(mess);
+                Parameters.mail = "YES";
             } catch (Exception ex) {
                 System.out.println("что то не то");
             }

@@ -1,0 +1,6 @@
+Thu Jul 06 20:13:57 MSK 2017 Успешность запуска OK Passed NO
+Thu Jul 06 20:04:08 MSK 2017 Успешность запуска BAD Passed
+Thu Jul 06 18:26:12 MSK 2017 Успешность запуска OK Passed
+Thu Jul 06 18:15:22 MSK 2017 Успешность запуска BAD Failed
+Thu Jul 06 12:30:46 MSK 2017 Успешность запуска OK Passed
+Thu Jul 06 12:23:03 MSK 2017 Успешность запуска BAD Failed

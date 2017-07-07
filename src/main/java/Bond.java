@@ -19,7 +19,8 @@ public class Bond {
 
     public static void bondChat() throws Exception {
         BondChat gameBondChat = new BondChat();
-        if (Parameters.resChat.equals("OK")) {
+        gameBondChat.searchStatusBondChat();
+        if (Parameters.resChat == "OK") {
             gameBondChat.bondChat();
 
             if (Parameters.resChat == "BAD") {
@@ -29,11 +30,11 @@ public class Bond {
             }
         }
 
-        if (Parameters.resChat != ("OK")) {
+        else if (Parameters.resChat == "BAD") {
             for (int i = 0; i < 5; i++) {
-                if (Parameters.resChat != ("OK")) gameBondChat.bondChat();
+                if (Parameters.resChat == "BAD") gameBondChat.bondChat();
 
-                if (Parameters.resChat == "OK") {
+                else if (Parameters.resChat == "OK") {
                     i = 10;
                     BondChat.note = Parameters.resOk;
                     Parameters.resChat = "OK";
@@ -41,13 +42,14 @@ public class Bond {
                     gameBondChat.logBondChat();
                     gameBondChat.writeDB();
                 }
-            }
+            }if (Parameters.mail == "YES") {gameBondChat.logBondChat();}
         }
     }
 
     public static void findBondStreet() throws Exception {
         BondStreet gameBondStreet = new BondStreet();
-        if (Parameters.resFindBondStreet.equals("OK")) {
+        gameBondStreet.searchStatusBondStreet();
+        if (Parameters.resFindBondStreet == "OK") {
             gameBondStreet.bondStreet();
 
             if (Parameters.resFindBondStreet == "BAD") {
@@ -57,11 +59,11 @@ public class Bond {
             }
         }
 
-        if (Parameters.resFindBondStreet != ("OK")) {
+        else if (Parameters.resFindBondStreet == "BAD") {
             for (int i = 0; i < 5; i++) {
-                if (Parameters.resFindBondStreet != ("OK")) gameBondStreet.bondStreet();
+                if (Parameters.resFindBondStreet == "BAD") gameBondStreet.bondStreet();
 
-                if (Parameters.resFindBondStreet == "OK") {
+                else if (Parameters.resFindBondStreet == "OK") {
                     i = 10;
                     gameBondStreet.note = Parameters.resOk;
                     Parameters.resFindBondStreet = "OK";
@@ -69,13 +71,14 @@ public class Bond {
                     gameBondStreet.logBondStreet();
                     gameBondStreet.writeDB();
                 }
-            }
+            }if (Parameters.mail == "YES") {gameBondStreet.logBondStreet();}
         }
     }
 
     public static void fool() throws Exception {
         Fool gameFool = new Fool();
-        if (Parameters.resFool.equals("OK")) {
+        gameFool.searchStatusFool();
+        if (Parameters.resFool == "OK") {
             gameFool.fool();
 
             if (Parameters.resFool == "BAD") {
@@ -85,11 +88,11 @@ public class Bond {
             }
         }
 
-        if (Parameters.resFool != ("OK")) {
+        else if (Parameters.resFool == "BAD") {
             for (int i =0; i < 5; i++) {
-                if (Parameters.resFool != ("OK")) gameFool.fool();
+                if (Parameters.resFool == "BAD") gameFool.fool();
 
-                if (Parameters.resFool == "OK") {
+                else if (Parameters.resFool == "OK") {
                     i = 10;
                     gameFool.note = Parameters.resOk;
                     Parameters.resFool = "OK";
@@ -97,13 +100,14 @@ public class Bond {
                     gameFool.logFool();
                     gameFool.writeDB();
                 }
-            }
+            }if (Parameters.mail == "YES") {gameFool.logFool();}
         }
     }
 
     public static void lotto() throws Exception {
         Lotto gameLotto = new Lotto();
-        if (Parameters.resLotto.equals("OK")) {
+        gameLotto.searchStatusLotto();
+        if (Parameters.resLotto == "OK") {
             gameLotto.lotto();
 
             if (Parameters.resLotto == "BAD") {
@@ -113,11 +117,11 @@ public class Bond {
             }
         }
 
-        else if (Parameters.resLotto != ("OK")) {
+        else if (Parameters.resLotto == "BAD") {
             for (int i = 0; i < 5; i++) {
-                if (Parameters.resLotto != ("OK")) gameLotto.lotto();
+                if (Parameters.resLotto == "BAD") gameLotto.lotto();
 
-                if (Parameters.resLotto == "OK") {
+                else if (Parameters.resLotto == "OK") {
                     i = 10;
                     gameLotto.note = Parameters.resOk;
                     Parameters.resLotto = "OK";
@@ -125,7 +129,7 @@ public class Bond {
                     gameLotto.logLotto();
                     gameLotto.writeDB();
                 }
-            }
+            }if (Parameters.mail == "YES") {gameLotto.logLotto();}
         }
     }
 }

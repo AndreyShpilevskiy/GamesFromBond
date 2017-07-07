@@ -9,10 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 import java.util.Date;
 import java.util.Properties;
@@ -22,7 +19,7 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElem
 
 public class BondStreet {
     Date date = new Date();
-
+    static String[] lines;
     long time;
     SignIn signIn = new SignIn();
     String note = " ";
@@ -37,7 +34,7 @@ public class BondStreet {
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("marionette", true);
         WebDriver driver = new FirefoxDriver(capabilities);
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, Parameters.timeOutWaitSec);
         Actions action = new Actions(driver);
 
         try {
@@ -46,17 +43,19 @@ public class BondStreet {
         driver.findElement(By.id(Parameters.xPathEmailField)).sendKeys(Parameters.login);
         driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).clear();
         driver.findElement(By.cssSelector(Parameters.xPathPasswordField)).sendKeys(Parameters.password);
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
         wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat)));
         driver.findElement(By.xpath(Parameters.xPathButtonChat)).click();
-        signIn.s = "OK во время теста Поиск BondStreet";
+        wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathLogoMain)));
+
+        signIn.s = "OK во время теста Поиск BondStreet ";
         note = Parameters.resOk;
         SignIn.logSignIn(); }
             catch (Exception e0) {
                 Parameters.resFindBondStreet = "BAD";
                 driver.quit();
-                signIn.s = "BAD во время теста Поиск BondStreet";
+                signIn.s = "BAD во время теста Поиск BondStreet ";
                 SignIn.logSignIn();
                 return note = Parameters.res;
             }
@@ -98,7 +97,7 @@ public class BondStreet {
 
                 } catch (Exception e1) {
                     try {
-                        Thread.sleep(20000);
+                        Thread.sleep(10000);
                         wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonGame))); // вход в раздел Игры
                         driver.findElement(By.xpath(Parameters.xPathButtonGame)).click(); // вход в раздел Игры
                         Thread.sleep(2000);
@@ -126,7 +125,7 @@ public class BondStreet {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + Parameters.resFindBondStreet + note;
+        String result = date.toString() + " Успешность запуска " + Parameters.resFindBondStreet + " " + note + Parameters.mail;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -137,6 +136,18 @@ public class BondStreet {
         fw.close();
         fr.close();
         br.close();
+    }
+
+    public void searchStatusBondStreet() throws IOException {
+
+        FileInputStream fis = new FileInputStream(new File(logFileName)); // путь заменить на нужный
+        byte[] content = new byte[fis.available()];
+        fis.read(content);
+        fis.close();
+        lines = new String(content, "UTF-8").split("\n"); // кодировку указать нужную
+        System.out.println(lines[0]);
+        if (lines[0].indexOf(" BAD ") > -1) { Parameters.resFindBondStreet = "BAD";}
+        if (lines[0].indexOf(" OK ")> -1) {Parameters.resFindBondStreet = "OK";}
     }
 
     public void logBondStreetBad() throws IOException, MessagingException {
@@ -157,8 +168,13 @@ public class BondStreet {
     }
 
     public void mailBondStreet() throws IOException, MessagingException {
-        if (Parameters.resFindBondStreet == "OK") ;
-        else if (Parameters.resFindBondStreet == "BAD"){
+        if     (lines[0].indexOf("BAD") > -1&& lines[0].indexOf("NO") > -1&&
+                lines[1].indexOf("BAD") > -1&& lines[1].indexOf("NO") > -1&&
+                lines[2].indexOf("BAD") > -1&& lines[2].indexOf("NO") > -1&&
+                lines[3].indexOf("BAD") > -1&& lines[3].indexOf("NO") > -1&&
+                lines[4].indexOf("BAD") > -1&& lines[4].indexOf("NO") > -1&&
+                lines[5].indexOf("BAD") > -1&& lines[5].indexOf("NO") > -1)
+        {
 
             Properties props = new Properties();
             props.put("mail.smtp.host", "smtp.gmail.com");
@@ -180,7 +196,7 @@ public class BondStreet {
                 mess.setSubject("Автотест по игре Поиск BondStreet не прошел ");
                 mess.setText("Автотест по игре Поиск BondStreet не прошел  " + note + date.toString());
                 Transport.send(mess);
-
+                Parameters.mail = "YES";
             }catch (Exception ex){
                 System.out.println("что то не то");
             }

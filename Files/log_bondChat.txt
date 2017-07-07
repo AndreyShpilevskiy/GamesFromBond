@@ -1,3 +1,6 @@
-Wed Jul 05 07:04:22 MSK 2017 Чат работает OKPassed
-Wed Jul 05 06:05:31 MSK 2017 Чат работает BAD 
-﻿
+Thu Jul 06 15:57:18 MSK 2017 Чат работает OK Passed NO
+Thu Jul 06 15:47:27 MSK 2017 Чат работает BAD Failed
+Thu Jul 06 14:50:00 MSK 2017 Чат работает OK Passed
+Thu Jul 06 14:42:12 MSK 2017 Чат работает BAD Failed
+Thu Jul 06 12:30:10 MSK 2017 Чат работает OK Passed
+Thu Jul 06 12:22:19 MSK 2017 Чат работает BAD Failed
