@@ -125,7 +125,7 @@ public class BondStreet {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + Parameters.resFindBondStreet + " " + note + Parameters.mail;
+        String result = date.toString() + " Успешность запуска " + Parameters.resFindBondStreet + " " + note + " " + Parameters.mail;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
@@ -145,7 +145,6 @@ public class BondStreet {
         fis.read(content);
         fis.close();
         lines = new String(content, "UTF-8").split("\n"); // кодировку указать нужную
-        System.out.println(lines[0]);
         if (lines[0].indexOf(" BAD ") > -1) { Parameters.resFindBondStreet = "BAD";}
         if (lines[0].indexOf(" OK ")> -1) {Parameters.resFindBondStreet = "OK";}
     }

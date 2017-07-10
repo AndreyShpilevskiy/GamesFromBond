@@ -118,7 +118,7 @@ public class BondChat {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Чат работает " + Parameters.resChat + " " + note + Parameters.mail;
+        String result = date.toString() + " Чат работает " + Parameters.resChat + " " + note+ " " + Parameters.mail;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;

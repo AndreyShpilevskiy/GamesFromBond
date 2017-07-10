@@ -25,14 +25,16 @@ public class Bond {
 
             if (Parameters.resChat == "BAD") {
                 gameBondChat.logBondChat();
-                gameBondChat.mailBondChat();
                 gameBondChat.writeDB();
             }
         }
 
         else if (Parameters.resChat == "BAD") {
             for (int i = 0; i < 5; i++) {
-                if (Parameters.resChat == "BAD") gameBondChat.bondChat();
+                if (Parameters.resChat == "BAD") {
+                    gameBondChat.bondChat();
+                    gameBondChat.mailBondChat();
+                }
 
                 else if (Parameters.resChat == "OK") {
                     i = 10;
@@ -54,14 +56,16 @@ public class Bond {
 
             if (Parameters.resFindBondStreet == "BAD") {
                 gameBondStreet.logBondStreet();
-                gameBondStreet.mailBondStreet();
                 gameBondStreet.writeDB();
             }
         }
 
         else if (Parameters.resFindBondStreet == "BAD") {
             for (int i = 0; i < 5; i++) {
-                if (Parameters.resFindBondStreet == "BAD") gameBondStreet.bondStreet();
+                if (Parameters.resFindBondStreet == "BAD") {
+                    gameBondStreet.bondStreet();
+                    gameBondStreet.mailBondStreet();
+                }
 
                 else if (Parameters.resFindBondStreet == "OK") {
                     i = 10;
@@ -83,14 +87,16 @@ public class Bond {
 
             if (Parameters.resFool == "BAD") {
                 gameFool.logFool();
-                gameFool.mailFool();
                 gameFool.writeDB();
             }
         }
 
         else if (Parameters.resFool == "BAD") {
             for (int i =0; i < 5; i++) {
-                if (Parameters.resFool == "BAD") gameFool.fool();
+                if (Parameters.resFool == "BAD") {
+                    gameFool.fool();
+                    gameFool.mailFool();
+                }
 
                 else if (Parameters.resFool == "OK") {
                     i = 10;
@@ -112,14 +118,16 @@ public class Bond {
 
             if (Parameters.resLotto == "BAD") {
                 gameLotto.logLotto();
-                gameLotto.mailLotto();
                 gameLotto.writeDB();
             }
         }
 
         else if (Parameters.resLotto == "BAD") {
             for (int i = 0; i < 5; i++) {
-                if (Parameters.resLotto == "BAD") gameLotto.lotto();
+                if (Parameters.resLotto == "BAD") {
+                    gameLotto.lotto();
+                    gameLotto.mailLotto();
+                }
 
                 else if (Parameters.resLotto == "OK") {
                     i = 10;
