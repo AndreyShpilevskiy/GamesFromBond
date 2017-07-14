@@ -91,7 +91,7 @@ public class SignIn {
         BufferedReader br = new BufferedReader(fr);
         Date date = new Date();
         String str = br.readLine();
-        String result = date.toString() + " Авторизация успешна " + s;
+        String result = date.toString() + " Authorization is successful " + s;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;

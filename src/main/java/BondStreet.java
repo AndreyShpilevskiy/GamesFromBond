@@ -49,13 +49,13 @@ public class BondStreet {
         driver.findElement(By.xpath(Parameters.xPathButtonChat)).click();
         wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathLogoMain)));
 
-        signIn.s = "OK во время теста Поиск BondStreet ";
+        signIn.s = "OK during the test of Find BondStreet ";
         note = Parameters.resOk;
-        SignIn.logSignIn(); }
+        }
             catch (Exception e0) {
                 Parameters.resFindBondStreet = "BAD";
                 driver.quit();
-                signIn.s = "BAD во время теста Поиск BondStreet ";
+                signIn.s = "BAD during the test of Find BondStreet ";
                 SignIn.logSignIn();
                 return note = Parameters.res;
             }
@@ -125,7 +125,7 @@ public class BondStreet {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + Parameters.resFindBondStreet + " " + note + " " + Parameters.mail;
+        String result = date.toString() + " Starting is successful " + Parameters.resFindBondStreet + " " + note + " " + Parameters.mail;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;

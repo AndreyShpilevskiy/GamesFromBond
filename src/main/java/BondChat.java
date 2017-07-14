@@ -48,13 +48,13 @@ public class BondChat {
         Thread.sleep(2000);
         driver.findElement(By.cssSelector(Parameters.xPathLoginButton)).click();
         wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathLogoMain)));
-        signIn.s = "OK во время теста Чата BondStreet ";
+        signIn.s = "OK during the test of Chat BondStreet ";
         note = Parameters.resOk;
-        SignIn.logSignIn(); }
+        }
             catch (Exception e0) {
                 Parameters.resChat = "BAD";
                 driver.quit();
-                signIn.s = "BAD во время теста Чата BondStreet ";
+                signIn.s = "BAD during the test of Chat BondStreet ";
                 SignIn.logSignIn();
                 return this.note = Parameters.res; }
 
@@ -118,7 +118,7 @@ public class BondChat {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Чат работает " + Parameters.resChat + " " + note+ " " + Parameters.mail;
+        String result = date.toString() + " Chat is worked " + Parameters.resChat + " " + note+ " " + Parameters.mail;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;

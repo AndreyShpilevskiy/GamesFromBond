@@ -47,13 +47,13 @@ public class Lotto {
             wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathButtonChat))); // клик на авторизоваться
             driver.findElement(By.xpath(Parameters.xPathButtonChat)).click(); // закрыть автоматически открывающийся чат
             wait.until(visibilityOfElementLocated(By.xpath(Parameters.xPathLogoMain)));
-            signIn.s = "OK во время теста игры Лото "; // присвоение данных для передачи в запись лога
+            signIn.s = "OK during the test of game Lotto "; // присвоение данных для передачи в запись лога
             note = Parameters.resOk;
-            SignIn.logSignIn(); } // запуск записи лога
+            } // запуск записи лога
         catch (Exception e0) { // исключение, если не получилось try
             Parameters.resLotto = "BAD";
             driver.quit(); // закрываем драйвер
-            signIn.s = "BAD во время теста игры Лото "; // присвоение данных для передачи в запись лога
+            signIn.s = "BAD during the test of game Lotto "; // присвоение данных для передачи в запись лога
             SignIn.logSignIn(); // запуск записи лога
             return note = Parameters.res; // присвоение нового занчения в переменню для записи в лог
         }
@@ -120,7 +120,7 @@ public class Lotto {
         FileReader fr = new FileReader(logFileName);
         BufferedReader br = new BufferedReader(fr);
         String str = br.readLine();
-        String result = date.toString() + " Успешность запуска " + Parameters.resLotto +" " + note + " " + Parameters.mail;
+        String result = date.toString() + " Starting is successful " + Parameters.resLotto +" " + note + " " + Parameters.mail;
         while (str != null) {
             String lineSeparator = System.getProperty("line.separator");
             result += lineSeparator + str;
