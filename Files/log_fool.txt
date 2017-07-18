@@ -1,3 +1,5 @@
+Tue Jul 18 09:45:36 MSK 2017 Starting is successful OK Passed NO
+Mon Jul 17 21:56:17 MSK 2017 Starting is successful BAD Passed NO
 Fri Jul 14 06:10:48 MSK 2017 Успешность запуска OK Passed NO
 Fri Jul 14 06:03:41 MSK 2017 Успешность запуска BAD Failed NO
 Thu Jul 13 21:10:10 MSK 2017 Успешность запуска OK Passed NO
